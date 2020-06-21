@@ -1,4 +1,0 @@
-{
-   "authURL": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA6bdV-9lBPW9Iz3ll7nsVcMBCevvKREeo",
-   "fetchGglIDURL": "https://tkdmanager-cb39f.firebaseio.com/allLocations.json"
-}

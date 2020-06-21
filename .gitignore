@@ -1,4 +1,6 @@
 /backend/node_modules
 /frontend/node_modules
-/backend/client_secret.json
-/backend/URL.json
+
+/frontend/.env
+/frontend/.env.production
+/backend/nodemon.json

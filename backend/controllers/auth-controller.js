@@ -1,4 +1,3 @@
-const { authURL, fetchGglIDURL } = require('../URL.json');
 const axios = require('axios');
 
 const login = async (req, res, next) => {
@@ -7,7 +6,7 @@ const login = async (req, res, next) => {
    let response2;
 
    try {
-      response1 = await axios.post(authURL, authData);
+      response1 = await axios.post(process.env.AUTH_URL, authData);
    } catch (err) {
       res.json({ error: err.response.data.error });
       return next();
@@ -17,7 +16,7 @@ const login = async (req, res, next) => {
    const authSuccess = { idToken, userId, email };
 
    try {
-      response2 = await axios.get(fetchGglIDURL);
+      response2 = await axios.get(process.env.FETCH_GGLID_URL);
    } catch (err) {
       res.json({ message: 'Somthing wrong happened while accessing firebase.' });
       return next();
