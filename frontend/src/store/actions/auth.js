@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { authURL, fetchGglIDURL } from '../../URL.json';
 import * as actionTypes from './actionTypes';
+import axInstance from '../../shared/axios-orders';
 
 export const authStart = () => {
    return {
@@ -8,12 +7,12 @@ export const authStart = () => {
    };
 };
 
-export const authSuccess = (token, userId, email) => {
+export const authenSuccess = (idToken, userId, email) => {
    return {
       type: actionTypes.AUTH_SUCCESS,
-      idToken: token,
-      userId: userId,
-      email: email,
+      idToken,
+      userId,
+      email,
    };
 };
 
@@ -48,50 +47,42 @@ export const gglIdFetchSuccess = (
 };
 
 export const auth = (email, password) => {
-   return dispatch => {
+   return async dispatch => {
       dispatch(authStart());
+
       const authData = {
          email: email,
          password: password,
          returnSecureToken: true,
       };
 
-      let authUrl = authURL;
+      const response = await axInstance.post('/auth/login', { authData });
 
-      axios
-         .post(authUrl, authData)
-         .then(response1 => {
-            let fetchGglIDUrl = fetchGglIDURL;
-            let locName = email.split('@')[0];
-            axios
-               .get(fetchGglIDUrl)
-               .then(response2 => {
-                  let locData = response2.data[locName];
-                  dispatch(
-                     gglIdFetchSuccess(
-                        locData.thisYear.ggleSheetID,
-                        locData.stats.ggleSheetID,
-                        locData.location,
-                        locData.locationID,
-                        locData.lastYear.ggleSheetID,
-                     )
-                  );
-                  dispatch(
-                     authSuccess(
-                        response1.data.idToken,
-                        response1.data.localId,
-                        email
-                     )
-                  );
-               })
-               .catch(err => {
-                  console.log(
-                     'Issues in fetching GoogleSheet ID from firebase.'
-                  );
-               });
-         })
-         .catch(err => {
-            dispatch(authFail(err.response.data.error));
-         });
+      if (response.data.error) {
+         dispatch(authFail(response.data.error));
+      } else if (response.data.message) {
+         dispatch(authFail({ message: response.data.message }))
+      }else {
+         const { authSuccess, fetchSuccess } = response.data;
+
+         // gglIDFetchSuccess first, because authen finish will fire the next processes right away.
+         dispatch(
+            gglIdFetchSuccess(
+               fetchSuccess.ggleID,
+               fetchSuccess.statsGglID,
+               fetchSuccess.location,
+               fetchSuccess.locationID,
+               fetchSuccess.lastYearGglID
+            )
+         );
+
+         dispatch(
+            authenSuccess(
+               authSuccess.idToken,
+               authSuccess.userId,
+               authSuccess.email
+            )
+         );
+      }
    };
 };

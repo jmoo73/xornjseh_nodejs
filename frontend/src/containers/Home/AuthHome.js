@@ -14,6 +14,7 @@ class Home extends Component {
    };
 
    async componentDidMount() {
+      // dataLoaded is needed to avoid unnecessary loading after login-loading.
       if (!this.props.dataLoaded && this.props.isAuthenticated && day) {
          await this.props.onStats(this.props.statsGglID, this.props.locationID);
          await this.props.onGgl(this.props.ggleID);
@@ -99,6 +100,7 @@ const mapStateToProps = state => {
       statsGglID: state.auth.statsGglID,
       locationID: state.auth.locationID,
       lastYearGglID: state.auth.lastYearGglID,
+      authLoading: state.auth.loading, // To avoid firing onStats before gglID's are injected.
    };
 };
 

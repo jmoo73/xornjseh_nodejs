@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './MembersWithBelt.module.css';
-import Spinner from '../../components/layout/Spinner';
+import Spinner from '../UI/Spinner/Spinner';
 import Loader from '../UI/Loader/Loader';
 import RoundButton from '../UI/Button/RoundButton';
 

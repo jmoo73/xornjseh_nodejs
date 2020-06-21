@@ -105,6 +105,7 @@ export const fetchGglDocs = ggleID => {
       dispatch(gglLoadStart());
 
       const responseTable = await axInstance.post('/classTable', { ggleID });
+      
       const { classTable, classNameTable } = responseTable.data;
       const classToday = classTable[today];
       // Build persons.

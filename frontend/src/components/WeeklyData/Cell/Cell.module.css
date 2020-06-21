@@ -35,16 +35,12 @@
 .titleCell {
    font-size: 17px;
    margin: 0 10px;
-   background-color: rgb(168, 168, 168);
-   color: white;
 }
 
 .activityTitleCell {
    height: 30px;
    font-size: 17px;
    margin: 0 10px;
-   background-color: rgb(168, 168, 168);
-   color: white;
 }
 
 .activityCell {
@@ -64,17 +60,13 @@
 .totalHeader {
    font-size: 17px;
    margin: 10px 10px;
-   background-color: rgb(168, 168, 168);
-   color: white;
    font-weight: normal;
 }
 
 .totalCell {
    font-size: 20px;
    margin: 10px 2px;
-   background-color: rgb(168, 168, 168);
-   color: white;
-   font-weight: normal;
+   font-weight: bold;
 }
 
 @media (max-width: 399px) {

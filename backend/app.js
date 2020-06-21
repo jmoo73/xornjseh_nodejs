@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const auth = require('./routers/auth-routes');
 const classTable = require('./routers/classTable-routes');
 const gglStats = require('./routers/gglStats-routes');
 const gglThisYear = require('./routers/gglThisYear-routes');
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
    next();
 });
 
+app.use('/auth', auth)
 app.use('/classTable', classTable);
 app.use('/gglStats', gglStats);
 app.use('/gglThisYear', gglThisYear);
