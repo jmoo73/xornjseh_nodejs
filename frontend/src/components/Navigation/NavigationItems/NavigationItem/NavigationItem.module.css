@@ -40,8 +40,8 @@
   .NavigationItem a:hover,
   .NavigationItem a:active,
   .NavigationItem a.active {
-      background-color: rgb(207, 124, 46);
-      border-bottom: 4px solid #40A4C8;
+      background-color: black;
+      border-bottom: 5px solid #40A4C8;
       color: white;
   }
 }

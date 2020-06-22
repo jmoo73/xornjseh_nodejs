@@ -10,7 +10,7 @@ function Toolbar(props) {
   return (
     <div className={classes.Toolbar}>
       <ToggleButton dropdownToggler={props.dropdownToggler} />
-      <div style={{ color: "black", fontWeight: "bold"}}>{logo}</div>
+      <div style={{ color: "white", fontWeight: "bold", fontSize: "22px"}}>{logo}</div>
       <nav className={classes.DesktopOnly}>
         <NavigationItems isAuth={props.isAuth} />
       </nav>

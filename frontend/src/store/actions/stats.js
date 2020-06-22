@@ -42,7 +42,12 @@ export const updateActivity = (currActivity, number) => {
    };
 };
 
-export const whenActivitySubmitClicked = (statsGglID, locationID, currActivity, number) => {
+export const whenActivitySubmitClicked = (
+   statsGglID,
+   locationID,
+   currActivity,
+   number
+) => {
    return async dispatch => {
       dispatch(statSaveStart());
 
@@ -72,7 +77,10 @@ export const fetchStat = (statsGglID, locationID) => {
    return async dispatch => {
       dispatch(statLoadStart());
       // Build stats.
-      const response = await axInstance.post('/gglStats/init', { statsGglID, locationID });
+      const response = await axInstance.post('/gglStats/init', {
+         statsGglID,
+         locationID,
+      });
       const { dailyStat, keyList } = response.data;
 
       dispatch(buildStats(dailyStat, keyList));

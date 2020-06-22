@@ -86,10 +86,6 @@ class Auth extends Component {
          />
       ));
 
-      if (this.props.loaing) {
-         form = <Spinner />;
-      }
-
       let errorMessage = null;
 
       if (this.props.error) {
@@ -101,16 +97,20 @@ class Auth extends Component {
          authRedirect = <Redirect to={this.props.authRedirectPath} />;
       }
 
-      return (
-         <div className={classes.Auth}>
-            {authRedirect}
-            {errorMessage}
-            {form}
-            <form onSubmit={this.submitHandler}>
-               <Button btnType="Success">SUBMIT</Button>
-            </form>
-         </div>
-      );
+      if (this.props.loading) {
+         return <Spinner />;
+      } else {
+         return (
+            <div className={classes.Auth}>
+               {authRedirect}
+               {errorMessage}
+               {form}
+               <form onSubmit={this.submitHandler}>
+                  <Button btnType="Success">SUBMIT</Button>
+               </form>
+            </div>
+         );
+      }
    }
 }
 

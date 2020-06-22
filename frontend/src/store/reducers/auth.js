@@ -51,8 +51,10 @@ const authLogout = (state, action) => {
    return updateObject(state, {
       token: null,
       userId: null,
+      error: null,
       email: null,
       ggleID: null,
+      statsGglID: null,
       location: null,
       locationID: null,
       lastYearGglID: null,

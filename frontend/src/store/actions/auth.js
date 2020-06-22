@@ -51,8 +51,8 @@ export const auth = (email, password) => {
       dispatch(authStart());
 
       const authData = {
-         email: email,
-         password: password,
+         email,
+         password,
          returnSecureToken: true,
       };
 
@@ -61,8 +61,8 @@ export const auth = (email, password) => {
       if (response.data.error) {
          dispatch(authFail(response.data.error));
       } else if (response.data.message) {
-         dispatch(authFail({ message: response.data.message }))
-      }else {
+         dispatch(authFail({ message: response.data.message }));
+      } else {
          const { authSuccess, fetchSuccess } = response.data;
 
          // gglIDFetchSuccess first, because authen finish will fire the next processes right away.

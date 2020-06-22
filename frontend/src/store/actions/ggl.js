@@ -51,7 +51,7 @@ export const whenMemberNameClicked = id => {
 };
 
 export const whenAttenderSubmitClicked = (ggleID, statsGglID, locationID) => {
-   return async dispatch => {
+   return dispatch => {
       dispatch(gglSaveStart());
       dispatch({
          type: actionTypes.UPDATE_PERSONS_WITH_CLASS_ATTENDER,

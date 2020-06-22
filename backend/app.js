@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', auth);
-app.use('/classTable', classTable);
 app.use('/gglStats', gglStats);
+app.use('/classTable', classTable);
 app.use('/gglThisYear', gglThisYear);
 
 app.listen(process.env.PORT || 5000);

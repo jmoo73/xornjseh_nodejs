@@ -70,8 +70,8 @@ class Home extends Component {
          <React.Fragment>
             <div className={classes.AuthHomeWrapper}>
                {gglLoading}
-               <h1>AuthHome</h1>
-               <h4>since Apr 12, 2020</h4>
+               <h1>태권도장 출석관리앱</h1>
+               <h4>Since Apr 12, 2020</h4>
                {individualCheckIn}
                <BackDropBlack show={this.state.checkInScreen} />
                <div className={classes.checkInWrapper}>

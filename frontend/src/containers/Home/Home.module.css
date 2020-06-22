@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+
 .HomeWrapper {
    display: flex;
    justify-content: center;
    flex-direction: column;
    align-items: center;
+   margin: 100px 0 0 0;
+}
+
+.HomeWrapper h1 {
+   font-weight: bold;
+   font-family: 'Nanum Brush Script', cursive;
+   font-size: 60px;
+}
+
+.HomeWrapper h4 {
+   font-family: 'Nanum Brush Script', cursive;
+   font-size: 40px;
 }

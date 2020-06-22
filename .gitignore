@@ -4,3 +4,5 @@
 /frontend/.env
 /frontend/.env.production
 /backend/nodemon.json
+/backend/utils/client_secret.json
+/frontend/temp.txt

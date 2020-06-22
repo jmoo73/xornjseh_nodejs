@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+
 .AuthHomeWrapper {
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   padding: 50px 0 0 0;
+   margin: 100px 0 0 0;
+}
+
+.AuthHomeWrapper h1 {
+   font-weight: bold;
+   font-family: 'Nanum Brush Script', cursive;
+   font-size: 60px;
+}
+
+.AuthHomeWrapper h4 {
+   font-family: 'Nanum Brush Script', cursive;
+   font-size: 40px;
 }
 
 .checkInWrapper {
