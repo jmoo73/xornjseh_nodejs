@@ -5,5 +5,5 @@
 /frontend/.env.production
 /backend/nodemon.json
 /backend/utils/client_secret.json
-/frontend/temp.txt
 /frontend/build
+/frontend/ggID_collection.txt

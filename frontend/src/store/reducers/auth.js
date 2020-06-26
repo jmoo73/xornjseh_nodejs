@@ -13,6 +13,9 @@ const initialState = {
    location: null,
    locationID: null,
    lastYearGglID: null,
+   // memberAuthRedirectPath: '/memberHome',
+   // isMemberAuthenticated: false,
+   //memberAttendance: null,
 };
 
 const authStart = (state, action) => {

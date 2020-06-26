@@ -22,7 +22,7 @@ class CheckIn extends Component {
       await this.props.fetchPersonalAttendance(
          this.props.ggleID,
          this.props.lastYearGglID,
-         fullName
+         [ fullName ],
       );
    };
 
@@ -30,7 +30,11 @@ class CheckIn extends Component {
       await this.props.whenSubmitClicked(
          this.props.ggleID,
          this.props.statsGglID,
-         this.props.locationID
+         this.props.locationID,
+         this.props.currClass,
+         this.props.currClassID,
+         this.props.persons,
+         this.props.classAttender
       ); // Saving the chosen attendants(inc. indivual) until now.
       this.setState({ isNameChosen: false, beltState: null, id: null });
    };

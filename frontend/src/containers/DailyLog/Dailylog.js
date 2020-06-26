@@ -91,6 +91,8 @@ class Dailylog extends Component {
             ggleID={this.props.ggleID}
             statsGglID={this.props.statsGglID}
             locationID={this.props.locationID}
+            classAttender={this.props.classAttender}
+            currClassID={this.props.currClassID}
          />
       );
 
@@ -147,10 +149,10 @@ class Dailylog extends Component {
 const mapStateToProps = state => {
    return {
       currClass: state.ggl.currClass,
+      currClassID: state.ggl.currClassID,
       currBelt: state.ggl.currBelt,
       classToday: state.ggl.classToday,
       classAttender: state.ggl.classAttender,
-      currClassID: state.ggl.currClassID,
       persons: state.ggl.persons,
       gglSaving: state.ggl.saving,
       attenderTouched: state.ggl.attenderTouched,
@@ -169,9 +171,25 @@ const mapDispatchToProps = dispatch => {
       resetCurrClass: () => dispatch(actions.resetCurrClass()),
       clickedClass: cl => dispatch(actions.whenClassClicked(cl)),
       clickedAttender: id => dispatch(actions.whenAttenderNameClicked(id)),
-      clickedAttenderSubmit: (ggleID, statsGglID, locationID) =>
+      clickedAttenderSubmit: (
+         ggleID,
+         statsGglID,
+         locationID,
+         currClass,
+         currClassID,
+         persons,
+         classAttender
+      ) =>
          dispatch(
-            actions.whenAttenderSubmitClicked(ggleID, statsGglID, locationID)
+            actions.whenAttenderSubmitClicked(
+               ggleID,
+               statsGglID,
+               locationID,
+               currClass,
+               currClassID,
+               persons,
+               classAttender
+            )
          ),
       clickedBelt: belt => dispatch(actions.whenBeltClicked(belt)),
       clickedMember: id => dispatch(actions.whenMemberNameClicked(id)),

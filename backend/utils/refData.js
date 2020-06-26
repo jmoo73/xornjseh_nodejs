@@ -1,8 +1,3 @@
-const now = new Date();
-const thisYear = now.getFullYear();
-
-const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
-
 const days = [
    'Sunday',
    'Monday',
@@ -66,6 +61,10 @@ function makeDateString(current) {
    );
 }
 
+const now = new Date();
+const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
+const thisYear = now.getFullYear();
+
 function weekDates(current) {
    let week = [];
    // Starting Monday not Sunday So, MTWTFS .  NO SAUNDAY is included. //
@@ -90,7 +89,7 @@ function makeDateStringNoDay(current) {
 }
 
 function makeMonthlyDataList() {
-   let attendance = []; // data list to return.
+   let attendance = []; // data list to return. 3 months!
 
    for (let i = 2; i >= 0; i--) {
       let id = 0;
@@ -117,7 +116,7 @@ function makeMonthlyDataList() {
                start: false,
             });
             id++;
-         } else if (now.getMonth() < month ) {
+         } else if (now.getMonth() < month) {
             // for last days of prev month.
             monthlyList.push({
                id,
@@ -129,7 +128,7 @@ function makeMonthlyDataList() {
                start: false,
             });
             id++;
-         } else if (now.getDay() !== 0) {
+         } else if (now.getDay() !== 0 || id < 6 * 7) {
             monthlyList.push({
                id,
                date: makeDateStringNoDay(now),
@@ -149,12 +148,12 @@ function makeMonthlyDataList() {
 }
 
 module.exports = {
+   date,
+   thisYear,
    months,
    days,
-   date,
    sixDays,
    colors,
-   thisYear,
    makeMonthlyDataList,
    weekDates,
 };

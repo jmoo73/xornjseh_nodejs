@@ -1,6 +1,11 @@
 import * as actionTypes from './actionTypes';
-import { today } from '../../shared/refData';
+import { days } from '../../shared/refData';
 import axInstance from '../../shared/axios-orders';
+import { updateObject } from '../../shared/utility';
+
+const now = new Date();
+const day = now.getDay(); // day=0 on Sunday.
+const today = days[day];
 
 export const gglLoadStart = () => {
    return { type: actionTypes.GGL_LOAD_START };
@@ -50,15 +55,59 @@ export const whenMemberNameClicked = id => {
    };
 };
 
-export const whenAttenderSubmitClicked = (ggleID, statsGglID, locationID) => {
-   return dispatch => {
+export const whenAttenderSubmitClicked = (
+   ggleID,
+   statsGglID,
+   locationID,
+   currClass,
+   currClassID,
+   persons,
+   classAttender
+) => {
+   return async dispatch => {
       dispatch(gglSaveStart());
-      dispatch({
-         type: actionTypes.UPDATE_PERSONS_WITH_CLASS_ATTENDER,
+
+      const currAttenderIdList = classAttender[currClass].map(el => el[1]);
+      // Update 'persons'.
+      const members = persons.map(person => {
+         let member = person;
+         let needGglUpdate = false;
+         let newAttClass = person.attClass;
+         let inList = currAttenderIdList.includes(person.id);
+         let inPerson = person.attClass.includes(currClass);
+         if (inList !== inPerson) {
+            if (inPerson) {
+               newAttClass = person.attClass.filter(el => el !== currClass);
+               needGglUpdate = true;
+            } else {
+               person.attClass.push(currClass);
+               needGglUpdate = true;
+            }
+         }
+         member = updateObject(person, {
+            attClass: newAttClass,
+            needGglUpdate,
+         });
+         return member;
+      });
+
+      // Writing to sheets.
+      await axInstance.post('/gglThisYear/update-persons', {
          ggleID,
+         members,
+      });
+      await axInstance.post('/gglStats/submit', {
          statsGglID,
          locationID,
+         name: currClassID,
+         number: currAttenderIdList.length,
       });
+
+      dispatch({
+         type: actionTypes.UPDATE_PERSONS_WITH_CLASS_ATTENDER,
+         members,
+      });
+
       dispatch(gglSaveFinish());
    };
 };
@@ -83,14 +132,26 @@ export const resetCurrClass = () => {
    };
 };
 
-export const fetchPersonalAttendance = (ggleID, lastYearGglID, fullName) => {
+export const fetchPersonalAttendance = (ggleID, lastYearGglID, fullNameList) => {
    return async dispatch => {
       dispatch(gglLoadStart);
       const response = await axInstance.post(
          '/gglThisYear/personal-attendance',
-         { ggleID, lastYearGglID, fullName }
+         { ggleID, lastYearGglID, fullNameList }
       );
       const personalAttendance = response.data.personalAttendance;
+      // Scaffold is made by makeMonthlyDataList() in refData from backend.
+      // personalAttendance = [ [ 'Apr', dateList], [ 'May', ... ], [ 'Jun', ... ] ]
+      // dateList = 
+      // {
+      //    id,
+      //    date: makeDateStringNoDay(now),
+      //    day: days[now.getDay()],
+      //    attendance: [],
+      //    needDataFetch: true,
+      //    test: false,
+      //    start: false,
+      // }
       dispatch(
          gglLoadSuccess({
             personalAttendance,
@@ -105,7 +166,7 @@ export const fetchGglDocs = ggleID => {
       dispatch(gglLoadStart());
 
       const responseTable = await axInstance.post('/classTable', { ggleID });
-      
+
       const { classTable, classNameTable } = responseTable.data;
       const classToday = classTable[today];
       // Build persons.

@@ -52,10 +52,10 @@
 }
 
 .confirmName {
-  height: 100px;
+  height: 80px;
   background-color: rgb(144, 199, 144);
   border-radius: 50px;
-  font-size: 35px;
+  font-size: 30px;
   padding: 0 40px;
   align-items: center;
   text-align: center;
@@ -70,10 +70,10 @@
 
 .finalSubmit {
   width: 250px;
-  height: 100px;
-  background-color: green;
+  height: 70px;
+  background-color: rgb(96, 197, 223);
   border-radius: 50px;
-  font-size: 40px;
+  font-size: 35px;
   color: white;
   font-family: 'ABeeZee', sans-serif;
 }

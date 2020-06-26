@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
+  padding: 0 0 50px 0;
 }
 
 @media (max-width: 699px) {
@@ -12,17 +13,17 @@
 }
 
 .buttonMain {
-  background-color: pink;
+  background-color: rgb(112, 168, 201);
   color: white;
   padding: 7px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 3px 2px;
+  margin: 16px 2px 0px 2px;
   cursor: pointer;
   border: none;
-  border-radius: 20px;
+  /* border-radius: 25px; */
 }
 
 .buttonMain:focus {

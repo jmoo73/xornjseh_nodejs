@@ -1,0 +1,56 @@
+.wrapper {
+   margin: 10px;
+}
+.calendarWrapper {
+   display: flex;
+   flex-direction: column;
+}
+
+.dummyTitle{
+   display: flex;
+}
+
+.name {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100px;
+   height: 22px;
+   background-color: rgb(189, 189, 189);
+   margin: 0 10px 0 0;
+   color: white;
+   font-size: 14px;
+}
+
+.monthText {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 30px;
+   height: 22px;
+   margin: 0 5px 0 0;
+   background-color: rgb(189, 189, 189);
+   color: white;
+   font-size: 14px;
+}
+
+.day, .stat {
+   display: flex;
+   justify-content: center;
+   width: 22px;
+   height: 22px;
+   background-color: rgb(189, 189, 189);
+   color: white;
+   border: 1px solid white;
+   box-sizing: border-box;
+   font-size: 14px;
+}
+
+.stat {
+   font-size: 13px; 
+}
+
+.sunday {
+   color: red;
+   background-color: white;
+}

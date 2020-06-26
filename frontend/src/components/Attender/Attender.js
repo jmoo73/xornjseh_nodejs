@@ -24,7 +24,11 @@ class Attender extends Component {
                this.props.clickedSubmit(
                   this.props.ggleID,
                   this.props.statsGglID,
-                  this.props.locationID
+                  this.props.locationID,
+                  this.props.currClass,
+                  this.props.currClassID,
+                  this.props.persons,
+                  this.props.classAttender
                )
             }
          >

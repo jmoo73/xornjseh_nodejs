@@ -1,10 +1,9 @@
 const gglIO = require('../utils/GglIO');
-const {
-   date,
-   colors,
-   thisYear,
-   makeMonthlyDataList,
-} = require('../utils/refData');
+const { colors, makeMonthlyDataList } = require('../utils/refData');
+
+const now = new Date();
+const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
+const thisYear = now.getFullYear();
 
 const initPersons = async (req, res, next) => {
    const { ggleID, classToday } = req.body;
@@ -84,54 +83,61 @@ const saveTestees = async (req, res, next) => {
 };
 
 const personalAttendance = async (req, res, next) => {
-   const { ggleID, lastYearGglID, fullName } = req.body;
+   const { ggleID, lastYearGglID, fullNameList } = req.body;
 
    const gglThisYear = await gglIO.readSheet(ggleID, 0);
    const gglLastYear = await gglIO.readSheet(lastYearGglID, 0);
 
    let id = null;
    let gglSheet = gglThisYear;
-   // [ [ 'Apr', dateList], [ 'May', ... ], [ 'Jun', ... ] ]
-   let allList = makeMonthlyDataList();
+   let allListList = [];
    const patt = /[/$#][^/$#!]*/g;
-
-   for (let m = allList.length - 1; m >= 0; m--) {
-      // dateList = [ { id: x, date: 'x/x/x', attendance: ['x', ... ], needDataFetch: true }, ... ]
-      let dateList = allList[m][1];
-
-      for (let day of dateList) {
-         if (day.date.split('/')[2] !== thisYear.toString()) {
-            gglSheet = gglLastYear;
-            id = null;
-         }
-         if (!id) {
-            for (let index = 0; index < gglSheet.length; index++) {
-               if (gglSheet[index].Name === fullName) {
-                  id = index;
-                  break;
+   
+   // allList/dateList = [ [ 'Apr', dateList], [ 'May', ... ], [ 'Jun', ... ] ]
+   for (let fullName of fullNameList) {
+      let allList = makeMonthlyDataList();
+      // m = 2, 1, 0
+      for (let m = allList.length - 1; m >= 0; m--) {
+         // dateList = [ { id: 0, date: 'x/x/x', day: 'Sunday', attendance: ['x', ... ], needDataFetch: true, test: true, start: false }, ... ]
+         let dateList = allList[m][1];
+         for (let day of dateList) {
+            if (day.date.split('/')[2] !== thisYear.toString()) {
+               gglSheet = gglLastYear;
+               id = null;
+            }
+            if (id === null) {
+               for (let index = 0; index < gglSheet.length; index++) {
+                  if (gglSheet[index].Name === fullName) {
+                     id = index;
+                     break;
+                  }
                }
             }
+            if (id !== null) {
+               if (gglSheet[id][day.date]) {
+                  day.attendance = gglSheet[id][day.date].match(patt)
+                     ? gglSheet[id][day.date]
+                          .match(patt)
+                          .map((el) => el.slice(1))
+                     : [];
+               }
+               if (gglSheet[id].StartedOn === day.date) {
+                  day.start = true;
+               }
+               if (gglSheet[id].TestedOn === day.date) {
+                  day.test = true;
+               }
+            } else {
+               // For the case when id is absent in the last year sheet.
+               day.attendance = [];
+            }
          }
-         if (id) {
-            if (gglSheet[id][day.date]) {
-               day.attendance = gglSheet[id][day.date].match(patt)
-                  ? gglSheet[id][day.date].match(patt).map((el) => el.slice(1))
-                  : [];
-            }
-            if (gglSheet[id].StartedOn === day.date) {
-               day.start = true;
-            }
-            if (gglSheet[id].TestedOn === day.date) {
-               day.test = true;
-            }
-         } else {
-            // For the case when id is absent in the last year sheet.
-            day.attendance = [];
-         }
+         id = null;
       }
+      allListList.push([fullName, allList]); // eqv. to [ fullName, allList ]
    }
 
-   res.json({ personalAttendance: allList });
+   res.json({ personalAttendance: allListList });
 };
 
 const addNewMember = async (req, res, next) => {

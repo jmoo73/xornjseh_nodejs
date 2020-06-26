@@ -12,6 +12,13 @@ function RoundButton(props) {
             // classPile.push(classes.biggerButton);
          }
          break;
+      case 'beltNum':
+         classPile = [classes.BeltButton, classes[props.beltColor], classes.BeltNum];
+         if (props.chosen) {
+            classPile.push(classes.BeltChosen);
+            // classPile.push(classes.biggerButton);
+         }
+         break;
       case 'beltBig':
          classPile = [classes.BeltButtonBig, classes[props.beltColor]];
          if (props.chosen) {

@@ -47,13 +47,14 @@
 @media (min-width: 400px) {
    .buttonClass {
       padding: 0px 5px;
-      font-size: 14px;
+      font-size: 16px;
       margin: 10px 2px;
-      width: 150px;
-      height: 50px;
+      width: 200px;
+      height: 60px;
+      border-radius: 30px;
    }
    .spanInButton {
-    font-size: 26px;
+    font-size: 20px;
     color: white;
  }
 }

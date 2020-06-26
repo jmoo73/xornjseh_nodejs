@@ -97,6 +97,10 @@ class Auth extends Component {
          authRedirect = <Redirect to={this.props.authRedirectPath} />;
       }
 
+      // if (this.props.isMemberAuthenticated) {
+      //    authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
+      // }
+
       if (this.props.loading) {
          return <Spinner />;
       } else {

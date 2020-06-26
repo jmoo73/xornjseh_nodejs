@@ -1,5 +1,8 @@
 const gglIO = require('../utils/GglIO');
-const { date, weekDates, sixDays } = require('../utils/refData');
+const { weekDates, sixDays } = require('../utils/refData');
+
+const now = new Date();
+const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 
 const init = async (req, res, next) => {
    const { statsGglID, locationID } = req.body;

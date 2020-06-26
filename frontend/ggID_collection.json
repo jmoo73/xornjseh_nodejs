@@ -1,0 +1,36 @@
+{
+   "allLocations": {
+      "chapelhill-nc": {
+         "location": "Chapel Hill",
+         "locationID": "0",
+         "email": "chapelhill@gmail.com",
+         "thisYear": {
+            "ggleSheetID": "17xzzwjh0Rqubmmj4QI5r4n51cHJBC7CyTh8XA6ZDXmU"
+         },
+         "lastYear": {
+            "ggleSheetID": "16MlB-dnTFZsYCp9IGxdZd6jCFsdOz9E-dAd6x0duTTg"
+         },
+         "stats": {
+            "ggleSheetID": "1Cw6VxcO4KToMlDvAXt_oSnOlgECe7IhZAFXcR1ssetQ"
+         }
+      },
+      "charlotte-nc": {
+         "location": "Charlotte",
+         "locationID": "1",
+         "email": "charlotte@gmail.com",
+         "thisYear": {
+            "ggleSheetID": "1zPPcwSFcDQPhBGTdu84JvahziyaGFatBMA670fNCvAU"
+         },
+         "lastYear": {
+            "ggleSheetID": "1OF_pqMeLP4GL1lZWcDXxv79ZohZO9GkxdCPrRJHNms0"
+         },
+         "stats": {
+            "ggleSheetID": "1Cw6VxcO4KToMlDvAXt_oSnOlgECe7IhZAFXcR1ssetQ"
+         }
+      }
+   }
+}
+
+
+
+

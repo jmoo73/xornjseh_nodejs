@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chooseColor {
+   display: flex;
+   flex-wrap: wrap;
+   margin: 0 0 20px 0;
+ }

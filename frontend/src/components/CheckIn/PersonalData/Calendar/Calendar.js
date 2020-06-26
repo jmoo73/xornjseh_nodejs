@@ -1,7 +1,10 @@
 import React from 'react';
 import SquareButton from '../../../UI/Button/SquareButton';
 import classes from './Calendar.module.css';
-import { daysShort, date } from '../../../../shared/refData';
+import { daysShort } from '../../../../shared/refData';
+
+const now = new Date();
+const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 
 const Calendar = props => {
    let month = <div className={classes.month}>{props.month}</div>;

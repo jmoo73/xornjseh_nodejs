@@ -6,7 +6,9 @@ import classes from './AuthHome.module.css';
 import SquareButton from '../../components/UI/Button/SquareButton';
 import BackDropBlack from '../../components/UI/BackDrop/BackDropBlack';
 import CheckIn from '../../components/CheckIn/CheckIn';
-import { day } from '../../shared/refData';
+
+const now = new Date();
+const day = now.getDay(); // day=0 on Sunday.
 
 class Home extends Component {
    state = {
@@ -50,6 +52,7 @@ class Home extends Component {
             statsGglID={this.props.statsGglID}
             locationID={this.props.locationID}
             lastYearGglID={this.props.lastYearGglID}
+            currClassID={this.props.currClassID}
          />
       );
 
@@ -70,7 +73,7 @@ class Home extends Component {
          <React.Fragment>
             <div className={classes.AuthHomeWrapper}>
                {gglLoading}
-               <h1>태권도장 출석관리앱</h1>
+               <h1>태권도장 출석관리앱 ver.3</h1>
                <h4>Since Apr 12, 2020</h4>
                {individualCheckIn}
                <BackDropBlack show={this.state.checkInScreen} />
@@ -91,6 +94,7 @@ const mapStateToProps = state => {
       isAuthenticated: state.auth.token !== null,
       personalAttendance: state.ggl.personalAttendance,
       currClass: state.ggl.currClass,
+      currClassID: state.ggl.currClassID,
       currBelt: state.ggl.currBelt,
       classToday: state.ggl.classToday,
       persons: state.ggl.persons,
@@ -109,10 +113,30 @@ const mapDispatchToProps = dispatch => {
       onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
       onStats: (statsGglID, locationID) =>
          dispatch(actions.fetchStat(statsGglID, locationID)),
-      fetchPersonalAttendance: (ggleID, lastYearGglID, fullName) =>
-         dispatch(actions.fetchPersonalAttendance(ggleID, lastYearGglID, fullName)),
-      whenSubmitClicked: (ggleID, statsGglID, locationID) =>
-         dispatch(actions.whenAttenderSubmitClicked(ggleID, statsGglID, locationID)),
+      fetchPersonalAttendance: (ggleID, lastYearGglID, fullNameList) =>
+         dispatch(
+            actions.fetchPersonalAttendance(ggleID, lastYearGglID, fullNameList)
+         ),
+      whenSubmitClicked: (
+         ggleID,
+         statsGglID,
+         locationID,
+         currClass,
+         currClassID,
+         persons,
+         classAttender
+      ) =>
+         dispatch(
+            actions.whenAttenderSubmitClicked(
+               ggleID,
+               statsGglID,
+               locationID,
+               currClass,
+               currClassID,
+               persons,
+               classAttender
+            )
+         ),
       whenNameClicked: id => dispatch(actions.whenMemberNameClicked(id)),
       whenBeltClicked: belt => dispatch(actions.whenBeltClicked(belt)),
       whenClassClicked: cl => dispatch(actions.whenClassClicked(cl)),

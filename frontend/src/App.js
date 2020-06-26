@@ -7,6 +7,7 @@ import AuthHome from "./containers/Home/AuthHome";
 import Auth from "./containers/Auth/Auth";
 import Dailylog from "./containers/DailyLog/Dailylog";
 import Weeklylog from "./containers/Weeklylog/Weeklylog";
+import Stats from "./containers/Stats/Stats";
 import Updatemember from "./containers/Updatemember/Updatemember";
 import Logout from "./containers/Auth/Logout/Logout";
 import Layout from "./hoc/Layout/Layout";
@@ -27,12 +28,23 @@ class App extends Component {
           <Route exact path="/authHome" component={AuthHome} />
           <Route exact path="/dailylog" component={() => <Dailylog />} />
           <Route exact path="/weeklylog" component={Weeklylog} />
+          <Route exact path="/stats" component={Stats} />
           <Route exact path="/updatemember" component={Updatemember} />
           <Route exact path="/logout" component={Logout} />
           <Redirect to="/authHome" />
         </Switch>
       );
     }
+
+    // if(this.props.isMemberAuthenticated) {
+    //   routes = (
+    //     <Switch>
+    //     <Route exact path="/memberHome" component={MemberHome} />
+    //     <Route exact path="/memberLogout" component={MemberLogout} />
+    //     <Redirect to="/memberHome" />
+    //   </Switch>
+    //   )
+    // };
 
     return (
       <React.Fragment>
@@ -45,6 +57,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.token !== null,
+    // isMemberAuthenticated: state.auth.isMemberAuthenticated,
   };
 };
 

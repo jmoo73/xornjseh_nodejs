@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
-import axInstance from '../../shared/axios-orders';
 
 const initialState = {
    classTable: {}, // { Monday: [[ 'Class1', 'White and Yellow'], ... ], ... }
@@ -93,41 +92,9 @@ const whenAttenderNameClicked = (state, action) => {
 };
 
 const whenAttenderSubmitClicked = (state, action) => {
-   const currAttenderIdList = state.classAttender[state.currClass].map(
-      el => el[1]
-   );
-   // Update 'persons'.
-   const members = state.persons.map(person => {
-      let member = person;
-      let needGglUpdate = false;
-      let newAttClass = person.attClass;
-      let inList = currAttenderIdList.includes(person.id);
-      let inPerson = person.attClass.includes(state.currClass);
-      if (inList !== inPerson) {
-         if (inPerson) {
-            newAttClass = person.attClass.filter(el => el !== state.currClass);
-            needGglUpdate = true;
-         } else {
-            person.attClass.push(state.currClass);
-            needGglUpdate = true;
-         }
-      }
-      member = updateObject(person, { attClass: newAttClass, needGglUpdate });
-      return member;
-   });
-
-   // No need to be aync/await. And async with reducer func causes error
-   // but with .forEach( async () => ...) is absolutely fine.
-   axInstance.post('/gglThisYear/update-persons', { ggleID: action.ggleID, members });
-   axInstance.post('/gglStats/submit', {
-      statsGglID: action.statsGglID,
-      locationID: action.locationID,
-      name: state.currClassID,
-      number: currAttenderIdList.length,
-   });
 
    return updateObject(state, {
-      persons: members,
+      persons: action.members,
       currClass: null,
       currClassID: null,
       attenderTouched: false,

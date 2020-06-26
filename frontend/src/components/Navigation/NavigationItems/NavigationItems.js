@@ -9,15 +9,30 @@ function NavigationItems(props) {
       <NavigationItem link="/authHome" exact>Home</NavigationItem>
       {day? <NavigationItem link="/dailylog" exact>Attendance</NavigationItem>: null}
       {day? <NavigationItem link="/weeklylog" exact>Week</NavigationItem>: null}
+      {day? <NavigationItem link="/stats" exact>Stat</NavigationItem>: null}
       {day? <NavigationItem link="/updatemember" exact>Update</NavigationItem> : null}
     </React.Fragment>
   )
+
+  // let logOut = null; 
+  // if (props.isAuth) {
+  //   logOut = (<NavigationItem link="/logout" exact>SignOut</NavigationItem>);
+  // } 
+  // if (props.isMemberAuth) {
+  //   logOut = (<NavigationItem link="/memberLogout" exact>SignOut</NavigationItem>);
+  // }
+
   return (
     <ul className={classes.NavigationItems}>
       {props.isAuth ? null : <NavigationItem link="/" exact>Home</NavigationItem>}
       {props.isAuth ? items : null}
-      {!props.isAuth ? <NavigationItem link="/auth" exact>LogIn</NavigationItem> 
-        : <NavigationItem link="/logout" exact>LogOut</NavigationItem>}
+      {!props.isAuth ? <NavigationItem link="/auth" exact>SignIn</NavigationItem> 
+        : <NavigationItem link="/logout" exact>SignOut</NavigationItem>}
+
+
+      {/* {props.isAuth || props.isMemberAuth ?  logOut : <NavigationItem link="/auth" exact>SignIn</NavigationItem> } */}
+
+
     </ul>
   )
 }

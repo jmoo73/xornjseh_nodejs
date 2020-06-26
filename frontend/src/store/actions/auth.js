@@ -50,6 +50,12 @@ export const auth = (email, password) => {
    return async dispatch => {
       dispatch(authStart());
 
+      // Here, check email pattern.
+      // if it has pattern like 'email: 'jeongmoo@chapelhill.nc, passwd: 'park''
+      // parser email to jeongmoo, chapelhill.
+      // parse memberData = { fullName: 'Jeongmoo Park', location: 'chapelhill' }
+      // use '/memberAuth' to bring memberAttendance
+
       const authData = {
          email,
          password,

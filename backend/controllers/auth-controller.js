@@ -8,7 +8,7 @@ const login = async (req, res, next) => {
    try {
       response1 = await axios.post(process.env.AUTH_URL, authData);
    } catch (err) {
-      res.json({ error: err.response.data.error });
+      res.json({ error: err.response.data.error }); // object { ..., message:'..'}
       return next();
    }
 
