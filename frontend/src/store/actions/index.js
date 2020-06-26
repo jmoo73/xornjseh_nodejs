@@ -1,6 +1,7 @@
 export {
   auth,
   logout,
+  memberAuthLogout,
 } from './auth';
 
 export {

@@ -34,7 +34,7 @@ class Auth extends Component {
             value: '',
             validation: {
                required: true,
-               minLength: 6,
+               minLength: 1,
             },
             valid: false,
             touched: false,
@@ -97,9 +97,9 @@ class Auth extends Component {
          authRedirect = <Redirect to={this.props.authRedirectPath} />;
       }
 
-      // if (this.props.isMemberAuthenticated) {
-      //    authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
-      // }
+      if (this.props.isMemberAuthenticated) {
+         authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
+      }
 
       if (this.props.loading) {
          return <Spinner />;
@@ -124,6 +124,7 @@ const mapStateToProps = state => {
       error: state.auth.error,
       isAuthenticated: state.auth.token !== null,
       authRedirectPath: state.auth.authRedirectPath,
+      memberAuthRedirectPath: state.auth.memberAuthRedirectPath,
    };
 };
 

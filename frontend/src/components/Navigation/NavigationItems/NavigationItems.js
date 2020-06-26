@@ -14,23 +14,19 @@ function NavigationItems(props) {
     </React.Fragment>
   )
 
-  // let logOut = null; 
-  // if (props.isAuth) {
-  //   logOut = (<NavigationItem link="/logout" exact>SignOut</NavigationItem>);
-  // } 
-  // if (props.isMemberAuth) {
-  //   logOut = (<NavigationItem link="/memberLogout" exact>SignOut</NavigationItem>);
-  // }
+  let logOut = null; 
+  if (props.isAuth) {
+    logOut = (<NavigationItem link="/logout" exact>SignOut</NavigationItem>);
+  } 
+  if (props.isMemberAuth) {
+    logOut = (<NavigationItem link="/memberLogout" exact>SignOut</NavigationItem>);
+  }
 
   return (
     <ul className={classes.NavigationItems}>
       {props.isAuth ? null : <NavigationItem link="/" exact>Home</NavigationItem>}
       {props.isAuth ? items : null}
-      {!props.isAuth ? <NavigationItem link="/auth" exact>SignIn</NavigationItem> 
-        : <NavigationItem link="/logout" exact>SignOut</NavigationItem>}
-
-
-      {/* {props.isAuth || props.isMemberAuth ?  logOut : <NavigationItem link="/auth" exact>SignIn</NavigationItem> } */}
+      {props.isAuth || props.isMemberAuth ?  logOut : <NavigationItem link="/auth" exact>SignIn</NavigationItem> }
 
 
     </ul>

@@ -3,6 +3,8 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const GGL_ID_FETCH_SUCCESS = 'GGL_ID_FETCH_SUCCESS';
+export const MEMBER_AUTH_LOGOUT = 'MEMBER_AUTH_LOGOUT';
+export const MEM_AUTH_SUCCESS = 'MEM_AUTH_SUCCESS';
 
 export const GGL_LOAD_SUCCESS = 'GGL_LOAD_SUCCESS';
 export const GGL_LOAD_START = 'GGL_LOAD_START';

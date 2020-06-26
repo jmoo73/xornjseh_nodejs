@@ -24,10 +24,12 @@ class Layout extends Component {
         <Toolbar
           dropdownToggler={this.dropdownToggler}
           isAuth={this.props.isAuthenticated}
+          isMemberAuth={this.props.isMemberAuth}
           location={this.props.location}
           />
         <Dropdown
           isAuth={this.props.isAuthenticated}
+          isMemberAuth={this.props.isMemberAuth}
           open={this.state.showDropdown}
           dropdownCloser={this.dropdownCloser}
         />
@@ -40,6 +42,7 @@ class Layout extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.token !== null,
+    isMemberAuth: state.auth.isMemberAuthenticated,
     location: state.auth.location,
   };
 };

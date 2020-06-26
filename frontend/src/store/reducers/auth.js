@@ -13,9 +13,9 @@ const initialState = {
    location: null,
    locationID: null,
    lastYearGglID: null,
-   // memberAuthRedirectPath: '/memberHome',
-   // isMemberAuthenticated: false,
-   //memberAttendance: null,
+   memberAuthRedirectPath: '/memberHome',
+   isMemberAuthenticated: false,
+   memberAttendance: null,
 };
 
 const authStart = (state, action) => {
@@ -36,6 +36,18 @@ const authFail = (state, action) => {
       error: action.error,
       loading: false,
    });
+};
+
+const memAuthSuccess = (state, action) => {
+   return updateObject(state, {
+      memberAttendance: action.memberAttendance,
+      location: action.location,
+      isMemberAuthenticated: true,
+   });
+};
+
+const memAuthLogout = (state, action) => {
+   return updateObject(state, initialState);
 };
 
 const gglIdFetchSuccess = (state, action) => {
@@ -74,8 +86,12 @@ const reducer = (state = initialState, action) => {
          return authFail(state, action);
       case actionTypes.AUTH_LOGOUT:
          return authLogout(state, action);
+      case actionTypes.MEMBER_AUTH_LOGOUT:
+         return memAuthLogout(state, action);
       case actionTypes.GGL_ID_FETCH_SUCCESS:
          return gglIdFetchSuccess(state, action);
+      case actionTypes.MEM_AUTH_SUCCESS:
+         return memAuthSuccess(state, action);
       default:
          return state;
    }

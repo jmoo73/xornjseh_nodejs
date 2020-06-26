@@ -11,7 +11,7 @@ function Dropdown(props) {
     <React.Fragment>
       <div className={attachedClasses.join(" ")} onClick={props.dropdownCloser}>
         <nav>
-          <NavigationItems isAuth={props.isAuth} />
+          <NavigationItems isAuth={props.isAuth} isMemberAuth={props.isMemberAuth} />
         </nav>
       </div>
     </React.Fragment>

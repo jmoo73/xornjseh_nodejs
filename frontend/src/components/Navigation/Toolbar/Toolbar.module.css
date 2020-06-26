@@ -17,9 +17,20 @@
   height: 100%;
 }
 
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
 
 @media (max-width: 699px) {
   .DesktopOnly {
       display: none;
+  }
+
+  .logo {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
   }
 }

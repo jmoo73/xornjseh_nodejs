@@ -4,6 +4,7 @@ const auth = require('./routers/auth-routes');
 const classTable = require('./routers/classTable-routes');
 const gglStats = require('./routers/gglStats-routes');
 const gglThisYear = require('./routers/gglThisYear-routes');
+const memberAuth = require('./routers/memberAuth-routes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', auth);
+app.use('/memberAuth', memberAuth);
 app.use('/gglStats', gglStats);
 app.use('/classTable', classTable);
 app.use('/gglThisYear', gglThisYear);

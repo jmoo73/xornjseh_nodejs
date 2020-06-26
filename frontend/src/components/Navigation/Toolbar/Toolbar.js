@@ -10,9 +10,9 @@ function Toolbar(props) {
   return (
     <div className={classes.Toolbar}>
       <ToggleButton dropdownToggler={props.dropdownToggler} />
-      <div style={{ color: "white", fontWeight: "bold", fontSize: "22px"}}>{logo}</div>
+      <div className={classes.logo}>{logo}</div>
       <nav className={classes.DesktopOnly}>
-        <NavigationItems isAuth={props.isAuth} />
+        <NavigationItems isAuth={props.isAuth} isMemberAuth={props.isMemberAuth} />
       </nav>
     </div>
   );
