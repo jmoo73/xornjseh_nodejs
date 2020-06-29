@@ -43,5 +43,6 @@
       background-color: black;
       border-bottom: 5px solid #40A4C8;
       color: white;
+      z-index: 10;
   }
 }

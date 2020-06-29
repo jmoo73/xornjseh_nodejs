@@ -6,7 +6,7 @@ import * as actions from '../../../store/actions/index';
 
 class Logout extends Component {
    componentDidMount() {
-      this.props.onLogOut();
+      this.props.onLogOutAuth();
       this.props.onLogOutGgl();
       this.props.onLogOutStat();
    }
@@ -18,7 +18,7 @@ class Logout extends Component {
 
 const mapDispatchToProps = dispatch => {
    return {
-      onLogOut: () => dispatch(actions.logout()),
+      onLogOutAuth: () => dispatch(actions.authLogout()),
       onLogOutGgl: () => dispatch(actions.gglLogout()),
       onLogOutStat: () => dispatch(actions.statLogout()),
    };

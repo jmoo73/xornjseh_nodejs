@@ -9,7 +9,7 @@
 .dayBar {
    color: black;
    padding: 4px 8px 0 8px;
-   margin: 5px;
+   margin: -10px 0 5px 0;
 }
 
 h3 {
@@ -23,7 +23,7 @@ h3 {
 }
 
 /* ipad or monitor */
-@media (min-width: 401px) {
+@media (min-width: 400px) {
    .dayBar {
       position: fixed;
       top: 0;

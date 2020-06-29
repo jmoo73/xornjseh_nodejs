@@ -1,7 +1,6 @@
 export {
   auth,
-  logout,
-  memberAuthLogout,
+  authLogout,
 } from './auth';
 
 export {
@@ -24,3 +23,10 @@ export {
   statLogout,
   initActivity,
 } from './stats'
+
+export {
+  memLogout,
+  initMember,
+  checkIn,
+  fetchAttData,
+} from './mem'

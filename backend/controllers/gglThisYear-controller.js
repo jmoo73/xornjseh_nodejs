@@ -3,7 +3,6 @@ const { colors } = require('../utils/refData');
 
 const now = new Date();
 const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
-const thisYear = now.getFullYear();
 
 const initPersons = async (req, res, next) => {
    const { ggleID, classToday } = req.body;

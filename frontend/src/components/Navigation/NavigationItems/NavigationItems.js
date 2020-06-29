@@ -4,13 +4,20 @@ import classes from "./NavigationItems.module.css"
 import { day } from '../../../shared/refData';
 
 function NavigationItems(props) {
-  let items = (
+  let authItems = (
     <React.Fragment>
-      <NavigationItem link="/authHome" exact>Home</NavigationItem>
+      <NavigationItem link="/auth-home" exact>Home</NavigationItem>
       {day? <NavigationItem link="/dailylog" exact>Attendance</NavigationItem>: null}
       {day? <NavigationItem link="/weeklylog" exact>Week</NavigationItem>: null}
       {day? <NavigationItem link="/stats" exact>Stat</NavigationItem>: null}
       {day? <NavigationItem link="/updatemember" exact>Update</NavigationItem> : null}
+    </React.Fragment>
+  )
+  
+  let memItems = (
+    <React.Fragment>
+    {day? <NavigationItem link="/mem-checkin" exact>CheckIn</NavigationItem>: null}
+    <NavigationItem link="/mem-attendance" exact>Attendance</NavigationItem>
     </React.Fragment>
   )
 
@@ -19,16 +26,16 @@ function NavigationItems(props) {
     logOut = (<NavigationItem link="/logout" exact>SignOut</NavigationItem>);
   } 
   if (props.isMemberAuth) {
-    logOut = (<NavigationItem link="/memberLogout" exact>SignOut</NavigationItem>);
+    logOut = (<NavigationItem link="/mem-logout" exact>SignOut</NavigationItem>);
   }
 
   return (
     <ul className={classes.NavigationItems}>
-      {props.isAuth ? null : <NavigationItem link="/" exact>Home</NavigationItem>}
-      {props.isAuth ? items : null}
-      {props.isAuth || props.isMemberAuth ?  logOut : <NavigationItem link="/auth" exact>SignIn</NavigationItem> }
-
-
+      {!props.isAuth && !props.isMemberAuth ? <NavigationItem link="/" exact>Home</NavigationItem> : null}
+      {props.isAuth ? authItems : null}
+      {props.isMemberAuth ? memItems : null}
+      {props.isAuth || props.isMemberAuth ?  logOut : <NavigationItem link="/auth" exact>SignIn
+        </NavigationItem> }
     </ul>
   )
 }

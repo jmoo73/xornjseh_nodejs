@@ -5,6 +5,9 @@ function RoundButton(props) {
    let classPile = [];
 
    switch (props.type) {
+      case 'beltWithName':
+         classPile = [classes.NameButton, classes[props.beltColor]];
+         break;
       case 'belt':
          classPile = [classes.BeltButton, classes[props.beltColor]];
          if (props.chosen) {

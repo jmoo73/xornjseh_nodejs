@@ -1,0 +1,83 @@
+.wrapper {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 0;
+   width: 100%;
+}
+
+.name {
+   display: flex;
+   justify-content: center;
+}
+
+.todayStartTest {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   width: 100%;
+   padding: 0 30px;
+}
+
+.today {
+   width: 100%;
+   color: rgb(207, 94, 94);
+   border: 4px dotted rgb(207, 94, 94);
+   padding: 0 10px;
+   margin: 2px 0;
+}
+
+.start {
+   width: 100%;
+   color: rgb(207, 94, 94);
+   border: 4px solid rgb(207, 94, 94);
+   padding: 0 10px;
+   margin: 2px 0;
+}
+
+.test {
+   width: 100%;
+   color: rgb(99, 99, 189);
+   border: 4px solid rgb(99, 99, 189);
+   padding: 0 10px;
+   margin: 2px 0;
+}
+
+.threeCalendars {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 5px;
+}
+
+/* ipad or monitor */
+@media (min-width: 400px) {
+   .todayStartTest {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      margin: 0 20px;
+   }
+
+   .today,
+   .start,
+   .test {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      padding: 0 15px;
+      margin: 0 15px;
+      border-radius: 10px;
+      width: 250px;
+      height: 40px;
+   }
+
+   .threeCalendars {
+      display: flex;
+      flex-direction: row;
+      margin: 30px 0 0 0;
+   }
+}

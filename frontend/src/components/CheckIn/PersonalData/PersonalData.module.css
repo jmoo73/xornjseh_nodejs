@@ -30,10 +30,10 @@
 
 .name {
    position: absolute;
-   top: 30px;
+   top: 40px;
    left: 6%;
    color: grey;
-   font-size: 40px;
+   font-size: 22px;
    font-style: italic;
 }
 

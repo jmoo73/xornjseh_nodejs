@@ -8,6 +8,9 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/index';
 
+const now = new Date();
+const day = now.getDay(); // day=0 on Sunday.
+
 class Auth extends Component {
    state = {
       controls: {
@@ -92,13 +95,21 @@ class Auth extends Component {
          errorMessage = <p>{this.props.error.message}</p>;
       }
 
+      // Coming two if's are not working...
+      // <Redirect ..> in App.js takes effect just after logging in.
+      // These parts are not refreshed just after loggin in.
       let authRedirect = null;
       if (this.props.isAuthenticated) {
          authRedirect = <Redirect to={this.props.authRedirectPath} />;
       }
 
       if (this.props.isMemberAuthenticated) {
-         authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
+         if (day !== 0) {
+            authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
+         } else {
+            console.log('in auth')
+            authRedirect = <Redirect to={this.props.memberAuthRedirectPathSunday} />
+         }
       }
 
       if (this.props.loading) {
@@ -124,7 +135,9 @@ const mapStateToProps = state => {
       error: state.auth.error,
       isAuthenticated: state.auth.token !== null,
       authRedirectPath: state.auth.authRedirectPath,
+      isMemberAuthenticated: state.auth.isMemberAuthenticated,
       memberAuthRedirectPath: state.auth.memberAuthRedirectPath,
+      memberAuthRedirectPathSunday: state.auth.memberAuthRedirectPathSunday,
    };
 };
 

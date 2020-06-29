@@ -87,3 +87,17 @@
       width: 40px;
    }
 }
+
+@media (max-width: 399px) {
+   .squareButton {
+      width: 180px;
+      height: 40px;
+      border-radius: 20px;
+      font-size: 15px;
+   }
+   .flat {
+      width: 40px;
+      border-radius: 5px;
+      height: 24px;
+   }
+}

@@ -1,21 +1,24 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
+import _ from 'lodash';
 
 const initialState = {
    token: null,
    userId: null,
    error: null,
    loading: false,
-   authRedirectPath: '/authHome',
+   authRedirectPath: '/auth-home',
    email: null,
+
+   locationID: null,
    ggleID: null,
    statsGglID: null,
-   location: null,
-   locationID: null,
    lastYearGglID: null,
-   memberAuthRedirectPath: '/memberHome',
+   location: null,
+   fullName: null,
+   memberAuthRedirectPath: '/mem-checkin',
+   memberAuthRedirectPathSunday: '/mem-attendance',
    isMemberAuthenticated: false,
-   memberAttendance: null,
 };
 
 const authStart = (state, action) => {
@@ -40,14 +43,9 @@ const authFail = (state, action) => {
 
 const memAuthSuccess = (state, action) => {
    return updateObject(state, {
-      memberAttendance: action.memberAttendance,
-      location: action.location,
       isMemberAuthenticated: true,
+      ..._.omit(action, 'type'), // { location, fullName, ggleID, lastYearGglID, statsGglID }
    });
-};
-
-const memAuthLogout = (state, action) => {
-   return updateObject(state, initialState);
 };
 
 const gglIdFetchSuccess = (state, action) => {
@@ -62,18 +60,8 @@ const gglIdFetchSuccess = (state, action) => {
    });
 };
 
-const authLogout = (state, action) => {
-   return updateObject(state, {
-      token: null,
-      userId: null,
-      error: null,
-      email: null,
-      ggleID: null,
-      statsGglID: null,
-      location: null,
-      locationID: null,
-      lastYearGglID: null,
-   });
+const logOut = (state, action) => {
+   return updateObject(state, initialState);
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,9 +73,7 @@ const reducer = (state = initialState, action) => {
       case actionTypes.AUTH_FAIL:
          return authFail(state, action);
       case actionTypes.AUTH_LOGOUT:
-         return authLogout(state, action);
-      case actionTypes.MEMBER_AUTH_LOGOUT:
-         return memAuthLogout(state, action);
+         return logOut(state, action);
       case actionTypes.GGL_ID_FETCH_SUCCESS:
          return gglIdFetchSuccess(state, action);
       case actionTypes.MEM_AUTH_SUCCESS:

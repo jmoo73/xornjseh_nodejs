@@ -24,23 +24,16 @@ export const authFail = error => {
    };
 };
 
-export const logout = () => {
+export const authLogout = () => {
    return {
       type: actionTypes.AUTH_LOGOUT,
    };
 };
 
-export const memAuthSuccess = (memberAttendance, location) => {
+export const memAuthSuccess = memAuthData => {
    return {
       type: actionTypes.MEM_AUTH_SUCCESS,
-      memberAttendance,
-      location,
-   }
-}
-
-export const memberAuthLogout = () => {
-   return {
-      type: actionTypes.MEMBER_AUTH_LOGOUT,
+      ...memAuthData, // { location, fullName, ggleID, lastYearGglID, statsGglID, locationID }
    };
 };
 
@@ -78,15 +71,16 @@ export const auth = (email, password) => {
                _.capitalize(email.split('@')[0]) + ' ' + _.capitalize(password),
             location: email.split('@')[1].replace('.', '-'),
          };
-         const memberAuthRes = await axInstance.post('/memberAuth', memberAuthData );
+         const memberAuthRes = await axInstance.post(
+            '/member/auth',
+            memberAuthData
+         );
 
          if (memberAuthRes.data.message) {
             dispatch(authFail({ message: memberAuthRes.data.message }));
          } else {
-            const { memberAttendance, location } = memberAuthRes.data;
-            // memberAttendance = [fullName, allList, belt, startedOn, testedOn]
-            console.log(memberAttendance)
-            dispatch(memAuthSuccess(memberAttendance, location))
+            //{ location, fullName, ggleID, lastYearGglID, statsGglID, locationID }
+            dispatch(memAuthSuccess(memberAuthRes.data));
          }
       } else if (response.data.message) {
          dispatch(authFail({ message: response.data.message }));

@@ -1,6 +1,10 @@
-const { thisYear, makeMonthlyDataList } = require('./refData');
+const { sixDays, thisYear, makeMonthlyDataList } = require('./refData');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const creds = require('./client_secret.json');
+
+const now = new Date();
+const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
+const xxxDay = sixDays[now.getDay()];
 
 async function readSheet(docID, index) {
    const doc = new GoogleSpreadsheet(docID);
@@ -95,7 +99,40 @@ const fetchAttendance = async (ggleID, lastYearGglID, fullNameList) => {
    return allListList;
 };
 
+const initMem = async (ggleID, fullName) => {
+   let className = [];
+   let classTime = [];
+   let classTitle = [];
+   
+   const gglThisYear = await readSheet(ggleID, 0);
+   const gglClassTable = await readSheet(ggleID, 1);
+   const gglTimeTable = await readSheet(ggleID, 2);
+   
+   for (let i = 0; i < gglClassTable.length; i++) {
+      classTime.push(gglTimeTable[i][xxxDay].trim());
+      className.push(gglClassTable[i][xxxDay].trim());
+      classTitle.push(gglClassTable[i].Classes.trim());
+   }
+   
+   const patt = /[/$#][^/$#!]*/g;
+   let checkedIn = [];
+   let belt;
+   for (let row of gglThisYear) {
+      if (row.Name === fullName) {
+         belt = row.Beltcolor;
+         if (row[date]) {
+            if (row[date].match(patt)) {
+               checkedIn = row[date].match(patt).map((el) => el.slice(1));
+            }
+         }
+      }
+   }
+
+   return { className, classTime, classTitle, checkedIn, belt };
+};
+
 exports.readSheet = readSheet;
 exports.getSheetObj = getSheetObj;
 exports.fetchAttendance = fetchAttendance;
 exports.doesMemberExist = doesMemberExist;
+exports.initMem = initMem;

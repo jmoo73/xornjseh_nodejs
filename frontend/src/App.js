@@ -12,7 +12,11 @@ import Updatemember from './containers/Updatemember/Updatemember';
 import Logout from './containers/Auth/Logout/Logout';
 import Layout from './hoc/Layout/Layout';
 import MemberHome from './containers/Home/MemberHome';
+import MemberAtt from './components/MemberAtt/MemberAtt';
 import MemberLogout from './containers/Auth/Logout/MemberLogout';
+
+const now = new Date();
+const day = now.getDay(); // day=0 on Sunday.
 
 class App extends Component {
    render() {
@@ -27,13 +31,13 @@ class App extends Component {
       if (this.props.isAuthenticated) {
          routes = (
             <Switch>
-               <Route exact path="/authHome" component={AuthHome} />
+               <Route exact path="/auth-home" component={AuthHome} />
                <Route exact path="/dailylog" component={() => <Dailylog />} />
                <Route exact path="/weeklylog" component={Weeklylog} />
                <Route exact path="/stats" component={Stats} />
                <Route exact path="/updatemember" component={Updatemember} />
                <Route exact path="/logout" component={Logout} />
-               <Redirect to="/authHome" />
+               <Redirect to="/auth-home" />
             </Switch>
          );
       }
@@ -41,9 +45,10 @@ class App extends Component {
       if (this.props.isMemberAuthenticated) {
          routes = (
             <Switch>
-               <Route exact path="/memberHome" component={MemberHome} />
-               <Route exact path="/memberLogout" component={MemberLogout} />
-               <Redirect to="/memberHome" />
+               <Route exact path="/mem-checkin" component={MemberHome} />
+               <Route exact path="/mem-attendance" component={MemberAtt} />
+               <Route exact path="/mem-logout" component={MemberLogout} />
+               {day === 0 ? <Redirect to="/mem-attendance" /> : <Redirect to="/mem-checkin" />}
             </Switch>
          );
       }

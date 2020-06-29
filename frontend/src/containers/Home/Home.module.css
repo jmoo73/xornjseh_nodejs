@@ -18,3 +18,16 @@
    font-family: 'Nanum Brush Script', cursive;
    font-size: 40px;
 }
+
+@media (max-width: 399px) {
+   .HomeWrapper h1 {
+      font-weight: bold;
+      font-family: 'Nanum Brush Script', cursive;
+      font-size: 30px;
+   }
+   
+   .HomeWrapper h4 {
+      font-family: 'Nanum Brush Script', cursive;
+      font-size: 25px;
+   }
+}

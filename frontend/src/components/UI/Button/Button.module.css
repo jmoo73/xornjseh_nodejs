@@ -77,3 +77,18 @@
   color: white;
   font-family: 'ABeeZee', sans-serif;
 }
+
+
+@media (max-width: 399px) {
+  .confirmName {
+    height: 40px;
+    background-color: rgb(144, 199, 144);
+    border-radius: 20px;
+    font-size: 15px;
+    padding: 0 20px;
+    align-items: center;
+    text-align: center;
+    font-family: 'ABeeZee', sans-serif;
+    margin: 0;
+  }
+}

@@ -14,9 +14,20 @@
    height: 25px;
 }
 
+.NameButton {
+   border: none;
+   font-size: 16px;
+   font-weight: bold;
+   padding: 6px 20px;
+   margin: 10px 5px;
+   height: 50px;
+   border-radius: 25px;
+}
+
 .BeltButton:focus,
 .BeltButtonBig:focus,
-.nameButtonBig:focus {
+.nameButtonBig:focus,
+.NameButton:focus {
    outline: none;
 }
 
@@ -153,6 +164,15 @@
       margin: 10px 5px;
       width: 80px;
       height: 40px;
+   }
+
+   .NameButton {
+      font-size: 30px;
+      font-weight: bold;
+      padding: 6px 30px;
+      margin: 10px 5px 20px 5px;
+      height: 60px;
+      border-radius: 30px;
    }
 
    .BeltNum {

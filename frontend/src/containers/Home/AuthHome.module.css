@@ -27,3 +27,17 @@
    display: flex;
    width: 100%;
 }
+
+@media (max-width: 399px) {
+   .AuthHomeWrapper h1 {
+      font-weight: bold;
+      font-family: 'Nanum Brush Script', cursive;
+      font-size: 30px;
+   }
+   
+   .AuthHomeWrapper h4 {
+      font-family: 'Nanum Brush Script', cursive;
+      font-size: 25px;
+   }
+   
+}
