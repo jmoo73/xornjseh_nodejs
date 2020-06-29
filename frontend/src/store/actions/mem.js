@@ -9,6 +9,10 @@ export const loadSuccess = doc => {
    return { type: actionTypes.MEM_LOAD_SUCCESS, ...doc };
 };
 
+export const checkInSuccess = currClass => {
+   return { type: actionTypes.CHECKIN_SUCCESS, currClass };
+};
+
 export const loadFinish = () => {
    return { type: actionTypes.MEM_LOAD_FINISH };
 };
@@ -57,6 +61,7 @@ export const checkIn = (
          currClassTitle,
          locationID,
       });
+      dispatch(checkInSuccess(currClass));
       dispatch(saveFinish());
    };
 };

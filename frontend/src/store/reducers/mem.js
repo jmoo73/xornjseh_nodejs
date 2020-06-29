@@ -4,7 +4,6 @@ import { updateObject } from '../../shared/utility';
 const initialState = {
    belt: null,
    currClass: null, // 'Tiger Tots'
-   currClassTitle: null, // 'Class1'
    memberAttendance: null, // memberAttendance = [[fullName, allList, belt, startedOn, testedOn]]
    checkedIn: null, // [ 'Tiger Tots', ... ]
    className: null, // [ 'Tiget Tots', ... ]
@@ -21,6 +20,14 @@ const loadStart = (state, action) => {
 const loadSuccess = (state, action) => {
    delete action.type;
    return updateObject(state, { ...action });
+};
+
+const checkInSuccess = (state, action) => {
+   let checkedIn = [...state.checkedIn];
+   checkedIn.push(action.currClass);
+   return updateObject(state, {
+      checkedIn,
+   });
 };
 
 const loadFinish = (state, action) => {
@@ -53,6 +60,8 @@ const reducer = (state = initialState, action) => {
          return saveFinish(state, action);
       case actionTypes.MEM_LOGOUT:
          return memLogout(state, action);
+      case actionTypes.CHECKIN_SUCCESS:
+         return checkInSuccess(state, action);
       default:
          return state;
    }

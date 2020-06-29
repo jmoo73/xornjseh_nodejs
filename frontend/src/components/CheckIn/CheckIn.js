@@ -34,7 +34,8 @@ class CheckIn extends Component {
          this.props.currClass,
          this.props.currClassID,
          this.props.persons,
-         this.props.classAttender
+         this.props.classAttender,
+         this.props.classToday
       ); // Saving the chosen attendants(inc. indivual) until now.
       this.setState({ isNameChosen: false, beltState: null, id: null });
    };
@@ -106,7 +107,7 @@ class CheckIn extends Component {
          <React.Fragment>
             {logIn}
             {personalData}
-            {this.props.saving ? <Spinner /> : null}
+            {/* {this.props.saving ? <Spinner /> : null} */}
          </React.Fragment>
       );
    }

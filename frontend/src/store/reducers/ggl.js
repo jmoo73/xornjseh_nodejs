@@ -95,6 +95,7 @@ const whenAttenderSubmitClicked = (state, action) => {
 
    return updateObject(state, {
       persons: action.members,
+      classAttender: action.classAttender,
       currClass: null,
       currClassID: null,
       attenderTouched: false,

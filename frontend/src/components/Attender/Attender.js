@@ -28,7 +28,8 @@ class Attender extends Component {
                   this.props.currClass,
                   this.props.currClassID,
                   this.props.persons,
-                  this.props.classAttender
+                  this.props.classAttender,
+                  this.props.classToday
                )
             }
          >

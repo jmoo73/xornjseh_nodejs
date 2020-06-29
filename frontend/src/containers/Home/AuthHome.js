@@ -124,7 +124,8 @@ const mapDispatchToProps = dispatch => {
          currClass,
          currClassID,
          persons,
-         classAttender
+         classAttender,
+         classToday
       ) =>
          dispatch(
             actions.whenAttenderSubmitClicked(
@@ -134,7 +135,8 @@ const mapDispatchToProps = dispatch => {
                currClass,
                currClassID,
                persons,
-               classAttender
+               classAttender,
+               classToday
             )
          ),
       whenNameClicked: id => dispatch(actions.whenMemberNameClicked(id)),

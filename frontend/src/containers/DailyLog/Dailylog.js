@@ -93,6 +93,7 @@ class Dailylog extends Component {
             locationID={this.props.locationID}
             classAttender={this.props.classAttender}
             currClassID={this.props.currClassID}
+            classToday={this.props.classToday}
          />
       );
 
@@ -178,7 +179,8 @@ const mapDispatchToProps = dispatch => {
          currClass,
          currClassID,
          persons,
-         classAttender
+         classAttender,
+         classToday
       ) =>
          dispatch(
             actions.whenAttenderSubmitClicked(
@@ -188,7 +190,8 @@ const mapDispatchToProps = dispatch => {
                currClass,
                currClassID,
                persons,
-               classAttender
+               classAttender,
+               classToday
             )
          ),
       clickedBelt: belt => dispatch(actions.whenBeltClicked(belt)),

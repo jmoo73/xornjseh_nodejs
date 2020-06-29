@@ -11,58 +11,89 @@ const day = now.getDay(); // day=0 on Sunday.
 class MemberHome extends Component {
    state = {
       currClass: null,
+      currClassTitle: null,
       saving: false,
    };
 
    async componentDidMount() {
-      if (!this.props.className && this.props.isMemberAuthenticated && day) {
+      if (
+         !this.props.className &&
+         this.props.isMemberAuthenticated &&
+         day !== 0
+      ) {
          await this.props.initMember(this.props.ggleID, this.props.fullName);
       }
    }
 
-   setCurrClass(cls) {
-      this.setState({ currClass: cls });
-   }
+   setCurrClass = cls => {
+      if (!this.props.checkedIn.includes(cls)) {
+         let index = this.props.className.indexOf(cls);
+         this.setState({
+            currClass: cls,
+            currClassTitle: this.props.classTitle[index],
+         });
+      } else {
+         this.setState({
+            currClass: null,
+            currClassTitle: null,
+         });
+      }
+   };
 
-   async fireCheckIn() {
+   fireCheckIn = async () => {
       this.setState({ saving: true });
       await this.props.checkIn(
          this.props.fullName,
          this.props.ggleID,
          this.props.statsGglID,
          this.state.currClass,
-         this.props.currClassTitle,
+         this.state.currClassTitle,
          this.props.locationID
       );
       this.setState({ currClass: null, saving: false });
-   }
+   };
 
    render() {
       let classList = null;
       let spinner = null;
       let btn = null;
+      let name = null;
 
-      if (day !== 0) {
+      if (this.props.className === null || this.state.saving) {
+         spinner = <Spinner />;
+      }
+
+      if (day !== 0 && this.props.className !== null) {
+         name = (
+            <div className={classes.name}>
+               <RoundButton type="beltWithName" beltColor={this.props.belt}>
+                  {this.props.fullName}
+               </RoundButton>
+            </div>
+         );
+
          classList = this.props.className.map((cl, index) => {
             let classStr = [classes.btn];
             if (this.props.checkedIn.includes(cl))
-               classStr.push(classes.checkedIn);
+               classStr.push(classes.checkedInClass);
+            if (this.state.currClass === cl) classStr.push(classes.chosen);
             return (
                <button
                   key={cl}
                   className={classStr.join(' ')}
                   onClick={() => this.setCurrClass(cl)}
                >
-                  {this.props.classTime[index]}: {cl}
+                  <div className={classes.timeClass}>
+                     <div className={classes.time}>
+                        {this.props.classTime[index]}
+                     </div>
+                     <div className={classes.cls}>{cl} </div>
+                  </div>
                </button>
             );
          });
 
-         if (this.props.memSaving || this.props.memLoading) {
-            spinner = <Spinner />;
-         }
-
-         if (this.props.currClass) {
+         if (this.state.currClass) {
             btn = (
                <button className={classes.confirm} onClick={this.fireCheckIn}>
                   Check-in
@@ -73,13 +104,9 @@ class MemberHome extends Component {
 
       return (
          <div>
-            <div className={classes.name}>
-               <RoundButton type="BeltWithName" beltColor={this.props.belt}>
-                  {this.props.fullName}
-               </RoundButton>
-            </div>
-            {classList}
-            {btn}
+            {name}
+            <div className={classes.btnWrapper}>{classList}</div>
+            <div className={classes.confirmWrapper}>{btn}</div>
             {spinner}
          </div>
       );
@@ -96,8 +123,8 @@ const mapStateToProps = state => {
       belt: state.mem.belt,
       className: state.mem.className,
       classTime: state.mem.classTime,
+      classTitle: state.mem.classTitle,
       checkedIn: state.mem.checkedIn,
-      currClassTitle: state.mem.currClassTitle,
       currClass: state.mem.currClass,
       memLoading: state.mem.loading,
       memSaving: state.mem.saving,

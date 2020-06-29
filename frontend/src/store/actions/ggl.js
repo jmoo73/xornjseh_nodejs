@@ -62,7 +62,8 @@ export const whenAttenderSubmitClicked = (
    currClass,
    currClassID,
    persons,
-   classAttender
+   classAttender,
+   classToday
 ) => {
    return async dispatch => {
       dispatch(gglSaveStart());
@@ -96,18 +97,32 @@ export const whenAttenderSubmitClicked = (
          ggleID,
          members,
       });
+
+      // ==================================================
+      // Build persons, refreshing.. In case personal checkin-connections are there.
+      // When submit is clicked, things will be refreshed.
+      const responsePersons = await axInstance.post(
+         '/gglThisYear/init-persons',
+         {
+            ggleID,
+            classToday,
+         }
+      );
+
+      dispatch({
+         type: actionTypes.UPDATE_PERSONS_WITH_CLASS_ATTENDER,
+         members: responsePersons.data.persons,
+         classAttender: responsePersons.data.classAttender,
+      });
+
       await axInstance.post('/gglStats/submit', {
          statsGglID,
          locationID,
          name: currClassID,
-         number: currAttenderIdList.length,
+         number: responsePersons.data.classAttender[currClass].length,
       });
 
-      dispatch({
-         type: actionTypes.UPDATE_PERSONS_WITH_CLASS_ATTENDER,
-         members,
-      });
-
+      // ==================================================
       dispatch(gglSaveFinish());
    };
 };
@@ -132,7 +147,11 @@ export const resetCurrClass = () => {
    };
 };
 
-export const fetchPersonalAttendance = (ggleID, lastYearGglID, fullNameList) => {
+export const fetchPersonalAttendance = (
+   ggleID,
+   lastYearGglID,
+   fullNameList
+) => {
    return async dispatch => {
       dispatch(gglLoadStart);
       const response = await axInstance.post(
@@ -142,7 +161,7 @@ export const fetchPersonalAttendance = (ggleID, lastYearGglID, fullNameList) => 
       const personalAttendance = response.data.personalAttendance;
       // Scaffold is made by makeMonthlyDataList() in refData from backend.
       // personalAttendance = [ [ 'Apr', dateList], [ 'May', ... ], [ 'Jun', ... ] ]
-      // dateList = 
+      // dateList =
       // {
       //    id,
       //    date: makeDateStringNoDay(now),

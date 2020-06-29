@@ -1,45 +1,151 @@
-.btn {
-   height: 20px;
-   background-color: rgb(192, 192, 221);
-   font-size: 14px;
+.name {
+   display: flex;
+   justify-content: center;
 }
 
-.checkedIn {
-   background-color: rgb(118, 118, 194);
+.btnWrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.btn {
+   height: 40px;
+   width: 150px;
+   background-color: rgb(233, 230, 230);
+   font-size: 16px;
+   border: none;
+   border-radius: 10px;
+   margin: 10px 0 0 0;
+}
+
+.chosen {
+   background-color: rgb(216, 214, 214);
+   color: white;
+   box-shadow: 0 5px #666;
+   transform: translateY(3px);
+}
+
+.timeClass {
+   display: flex;
+   flex-direction: column;
+}
+
+.time {
+   font-size: 12px;
+}
+
+.cls {
    font-size: 14px;
-   box-shadow: 0 10px #666;
-   transform: translateY(6px);
+   font-weight: bold;
+}
+
+.checkedInClass {
+   background-color: rgb(177, 176, 176);
+   background-image: url('../../assets/images/check.png');
+   background-position: center;
+   background-size: 50% 100%;
+   background-repeat: no-repeat;
+
+   color: white;
+   box-shadow: 0 5px #666;
+   transform: translateY(3px);
+}
+
+.confirmWrapper {
+   display: flex;
+   justify-content: center;
 }
 
 .confirm {
    height: 30px;
-   width: 50px;
+   width: 90px;
    background-color: pink;
    font-size: 20px;
    border-radius: 15px;
+   border: none;
 }
 
-.confirm:focus, .btn:focus {
+.confirm {
+   height: 50px;
+   width: 120px;
+   background-color: skyblue;
+   color: white;
+   font-size: 18px;
+   font-weight: bold;
+   border-radius: 30px;
+   border: none;
+   margin: 30px 0 0 0;
+}
+
+.confirm:active {
+   box-shadow: 0 5px #666;
+   transform: translateY(3px);
+}
+
+.confirm:focus,
+.btn:focus {
    outline: none;
 }
 
 @media (min-width: 400px) {
-   .btn {
-      height: 20px;
-      background-color: rgb(192, 192, 221);
-      font-size: 14px;
+   .btnWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
    }
 
-   .checkedIn {
-      background-color: rgb(118, 118, 194);
-      font-size: 14px;
+   .btn {
+      height: 60px;
+      width: 180px;
+      background-color: rgb(233, 230, 230);
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      margin: 0 20px;
+   }
+
+   .chosen {
+      background-color: rgb(216, 214, 214);
+      color: white;
+      box-shadow: 0 10px #666;
+      transform: translateY(6px);
+   }
+   
+   .timeClass {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .time {
+      font-size: 16px;
+   }
+
+   .cls {
+      font-size: 18px;
+      font-weight: bold;
+   }
+
+   .checkedInClass {
+      background-color: rgb(177, 176, 176);
+      color: white;
+      box-shadow: 0 10px #666;
+      transform: translateY(6px);
    }
 
    .confirm {
-      height: 30px;
-      width: 50px;
-      background-color: pink;
-      font-size: 20px;
-      border-radius: 15px;
+      height: 60px;
+      width: 150px;
+      background-color: skyblue;
+      color: white;
+      font-size: 25px;
+      border-radius: 30px;
+      border: none;
+      margin: 50px 0 0 0;
+   }
+
+   .confirm:active {
+      box-shadow: 0 10px #666;
+      transform: translateY(6px);
    }
 }

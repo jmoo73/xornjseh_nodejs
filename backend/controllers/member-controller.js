@@ -98,7 +98,7 @@ const checkIn = async (req, res, next) => {
    const patt = /[/$#][^/$#!]*/g;
    let checkedIn;
    for (let i = 0; i < gglThisYear.length; i++) {
-      if ((gglThisYear[i].Name = fullName)) {
+      if ((gglThisYear[i].Name === fullName)) {
          gglThisYear[i][date] =
             (gglThisYear[i][date] ? gglThisYear[i][date] : '') + attStr;
          checkedIn = gglThisYear[i][date].match(patt).map((el) => el.slice(1));
