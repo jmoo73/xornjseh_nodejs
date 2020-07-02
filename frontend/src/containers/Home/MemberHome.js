@@ -4,6 +4,7 @@ import classes from './MemberHome.module.css';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 import RoundButton from '../../components/UI/Button/RoundButton';
+import DayBar from '../../components/DayBar/DayBar';
 
 const now = new Date();
 const day = now.getDay(); // day=0 on Sunday.
@@ -105,6 +106,7 @@ class MemberHome extends Component {
       return (
          <div>
             {name}
+            <DayBar fontSize='twenty' />
             <div className={classes.btnWrapper}>{classList}</div>
             <div className={classes.confirmWrapper}>{btn}</div>
             {spinner}

@@ -10,7 +10,7 @@ const PersonalRecord = props => {
 
    const sevenWeeks = () => {
       let weekStr = 'SMTWTFS'.repeat(6);
-      let header = ['계', 'BB', 'SP'];
+      let header = ['Tt', 'BB', 'SP'];
       let tbs = header.map(item => {
          return (
             <div key={item} className={classes.stat}>
@@ -34,8 +34,8 @@ const PersonalRecord = props => {
 
    let dummyTitle = (
       <div className={classes.dummyTitle}>
-         <div className={classes.name}>이름</div>
-         <div className={classes.monthText}>달</div>
+         <div className={classes.name}>Name</div>
+         <div className={classes.monthText}>Mth</div>
          {sevenWeeks()}
       </div>
    );

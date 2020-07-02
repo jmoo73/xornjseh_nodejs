@@ -37,7 +37,7 @@ const auth = async (req, res, next) => {
    }
 
    res.json({
-      location,
+      location: response.data[location].location,
       fullName,
       ggleID: response.data[location].thisYear.ggleSheetID,
       lastYearGglID: response.data[location].lastYear.ggleSheetID,

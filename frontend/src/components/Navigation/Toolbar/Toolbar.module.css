@@ -1,37 +1,61 @@
 .Toolbar {
-  height: 56px;
-  width: 100%;
-  /* position: fixed;
+   height: 56px;
+   width: 100%;
+   /* position: fixed;
   top: 0;
   left: 0; */
-  background-color: grey;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  box-sizing: border-box;
-  z-index: 90;
+   background-color: grey;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 10px;
+   box-sizing: border-box;
+   z-index: 90;
 }
 
 .Toolbar nav {
-  height: 100%;
+   height: 100%;
+}
+
+.logoWrapper {
+   display: flex;
 }
 
 .logo {
-  color: white;
-  font-weight: bold;
-  font-size: 22px;
+   color: white;
+   font-weight: bold;
+   font-size: 22px;
+   margin: 0 10px 0 0;
+}
+
+.credit {
+  display: none;
+  color: rgb(14, 201, 248);
+  font-size: 17px;
   margin: 0 10px 0 0;
+  font-style: italic;
+}
+
+.logoWrapper:hover .logo {
+  display: none;
+}
+
+.logoWrapper:hover .credit {
+  display: flex;
 }
 
 @media (max-width: 699px) {
-  .DesktopOnly {
+   .DesktopOnly {
       display: none;
-  }
+   }
 
-  .logo {
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
+   .logo {
+      color: white;
+      font-size: 15px;
+   }
+
+   .credit {
+    display: none;
+    font-size: 14px;
   }
 }

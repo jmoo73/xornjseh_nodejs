@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './ClassBar.module.css';
 import Loader from '../UI/Loader/Loader';
-import DayBar from './DayBar/DayBar';
+import DayBar from '../DayBar/DayBar';
 
 class ClassBar extends Component {
    render() {
@@ -55,7 +55,7 @@ class ClassBar extends Component {
          return (
             <React.Fragment>
                <div className={classes.classBarWrapper}>
-                  <DayBar />
+                  <DayBar fontSize='twenty' />
                   <div className={classes.classBars}>
                      {classList}
                      {activityList}

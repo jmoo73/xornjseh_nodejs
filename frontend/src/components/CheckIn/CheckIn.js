@@ -5,7 +5,7 @@ import BeltSelect from './BeltSelect/BeltSelect';
 import SmallClassButton from './SmallClassButton/SmallClassButton';
 import Spinner from '../UI/Spinner/Spinner';
 import PersonalData from './PersonalData/PersonalData';
-import DayBar from '../ClassBar/DayBar/DayBar';
+import DayBar from '../DayBar/DayBar';
 
 class CheckIn extends Component {
    state = {
@@ -22,7 +22,7 @@ class CheckIn extends Component {
       await this.props.fetchPersonalAttendance(
          this.props.ggleID,
          this.props.lastYearGglID,
-         [ fullName ],
+         [fullName]
       );
    };
 
@@ -53,11 +53,11 @@ class CheckIn extends Component {
       if (!this.state.isNameChosen) {
          logIn = (
             <div className={classes.checkInWrapper}>
-               <div
-                  className={classes.dayBar}
-                  onClick={this.props.backToAuthHome}
-               >
-                  <DayBar />
+               <div className={classes.dot} onClick={this.props.backToAuthHome}>
+                  .
+               </div>
+               <div className={classes.dayBar}>
+                  <DayBar fontSize="fifteen" />
                </div>
                <SmallClassButton
                   whenClassClicked={cls => this.classStateChange(cls)}
@@ -94,7 +94,7 @@ class CheckIn extends Component {
                   id={this.state.id}
                />
             );
-         } else
+         } else if (!this.props.saving)
             personalData = (
                <React.Fragment>
                   <Spinner />
@@ -107,7 +107,7 @@ class CheckIn extends Component {
          <React.Fragment>
             {logIn}
             {personalData}
-            {/* {this.props.saving ? <Spinner /> : null} */}
+            {this.props.saving ? <Spinner /> : null}
          </React.Fragment>
       );
    }

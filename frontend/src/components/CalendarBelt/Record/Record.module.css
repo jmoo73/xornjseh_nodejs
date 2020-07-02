@@ -110,3 +110,121 @@
    margin: 0 5px 0 0;
    font-size: 13px;  
 }
+
+
+@media (max-width: 1024px) {
+
+   .wrapper {
+      display: flex;
+      margin: 10px 0;
+   }
+   
+   .name {
+      display: flex;
+      justify-content: center;
+      width: 100px;
+      height: 57px;
+      align-items: center;
+      margin: 0 10px 0 0;
+      border: 3px solid rgb(202, 202, 202);
+      font-size: 14px;
+   }
+   
+   .lineCalendar {
+      display: flex;
+   }
+   
+   .day {
+      display: flex;
+      flex-direction: column;
+      width: 19px;
+      height: 19px;
+      background-color: rgb(230, 230, 230);
+      box-sizing: border-box;
+      border: 1px solid white;
+   }
+   
+   .sunday {
+      background-color: white;
+   }
+   
+   .sunday .dayUp {
+      color: red;
+   }
+   
+   .dayUp {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 40%;
+      color: rgb(172, 170, 170);
+      font-weight: bold;
+      font-style: italic;
+      font-size: 8px;
+   }
+   
+   .dayDown {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60%;
+      color: red;
+      font-size: 10px;
+   }
+   
+   
+   .noDisplay {
+      visibility: hidden;
+   }
+   
+   .one {
+      background-color: rgb(255, 255, 96);
+   }
+   
+   .two {
+      background-color: yellowgreen;
+   }
+   
+   .three {
+      background-color: green;
+   }
+   
+   .today {
+      border: 2px dotted red;
+   }
+   
+   .test {
+      border: 2px solid blue;
+   }
+   
+   .start {
+      border: 2px solid red;
+   }
+   
+   .stat {
+      display: flex;
+   }
+   
+   .board, .total, .spar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 19px;
+      height: 19px;
+      background-color: rgb(230, 230, 230);
+      box-sizing: border-box;
+      border: 1px solid white;
+      font-size: 10px;
+      font-weight: bold
+   }
+   
+   .monthText {
+      display: flex;
+      justify-content: center;
+      width: 30px;
+      height: 19px;
+      margin: 0 5px 0 0;
+      font-size: 13px;  
+   }
+   
+}

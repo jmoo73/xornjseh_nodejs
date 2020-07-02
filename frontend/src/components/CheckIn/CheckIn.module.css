@@ -22,13 +22,22 @@ h3 {
    z-index: 600;
 }
 
+.dot {
+   display: none;
+}
+
 /* ipad or monitor */
 @media (min-width: 400px) {
    .dayBar {
+      color: black;
+      padding: 4px 8px 0 8px;
+      margin: -10px 0 5px 0;
+   }
+
+   .dot {
+      display: flex;
       position: fixed;
       top: 0;
-      left: 0;
-      padding: 3px 12px 6px 12px;
-      margin: 5px;
+      right: 0;
    }
 }

@@ -54,3 +54,59 @@
    color: red;
    background-color: white;
 }
+
+@media (max-width: 1024px) {
+
+   .wrapper {
+      margin: 10px;
+   }
+   .calendarWrapper {
+      display: flex;
+      flex-direction: column;
+   }
+   
+   .dummyTitle{
+      display: flex;
+   }
+   
+   .name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 19px;
+      background-color: rgb(189, 189, 189);
+      margin: 0 10px 0 0;
+      color: white;
+      font-size: 12px;
+   }
+   
+   .monthText {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 19px;
+      margin: 0 5px 0 0;
+      background-color: rgb(189, 189, 189);
+      color: white;
+      font-size: 12px;
+   }
+   
+   .day, .stat {
+      display: flex;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      background-color: rgb(189, 189, 189);
+      color: white;
+      border: 1px solid white;
+      box-sizing: border-box;
+      font-size: 12px;
+   }
+
+   .sunday {
+      color: red;
+      background-color: white;
+   }
+}

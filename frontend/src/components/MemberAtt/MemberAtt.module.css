@@ -18,6 +18,7 @@
    flex-direction: column;
    width: 100%;
    padding: 0 30px;
+   font-size: 12px;
 }
 
 .today {
@@ -54,7 +55,7 @@
    margin: 5px;
 }
 
-/* ipad or monitor */
+/* ===================iPad=========================== */
 @media (min-width: 400px) {
    .todayStartTest {
       display: flex;
@@ -76,6 +77,39 @@
       border-radius: 10px;
       width: 250px;
       height: 40px;
+      font-size: 12px;
+   }
+
+   .threeCalendars {
+      display: flex;
+      flex-direction: row;
+      margin: 30px 0 0 0;
+   }
+}
+
+/* ===================big monitor=========================== */
+@media (min-width: 1025px) {
+   .todayStartTest {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      margin: 0 20px;
+   }
+
+   .today,
+   .start,
+   .test {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      padding: 0 15px;
+      margin: 0 15px;
+      border-radius: 10px;
+      width: 250px;
+      height: 40px;
+      font-size: 14px;
    }
 
    .threeCalendars {

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+.date {
+   font-size: 14px;
+   text-align: center;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.twenty {
+   font-size: 20px;
+}
+
+.fifteen {
+   font-size: 15px;
+}
+
+.ten {
+   font-size: 10px;
+}
+
+@media (max-width: 399px) {
+  .twenty {
+    font-size: 13px;
+  }
+}

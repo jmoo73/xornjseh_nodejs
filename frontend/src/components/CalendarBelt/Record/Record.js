@@ -34,9 +34,9 @@ const LinearCalendar = props => {
          if (attNum === 1) classStr.push(classes.one);
          if (attNum === 2) classStr.push(classes.two);
          if (attNum >= 3) classStr.push(classes.three);
-         if (eachDay.test) classStr.push(classes.test);
-         if (eachDay.start) classStr.push(classes.start);
-         if (eachDay.date === date) classStr.push(classes.today);
+         if (eachDay.test && eachDay.needDataFetch) classStr.push(classes.test);
+         if (eachDay.start && eachDay.needDataFetch) classStr.push(classes.start);
+         if (eachDay.date === date && eachDay.needDataFetch) classStr.push(classes.today);
          if (eachDay.day === 'Sunday') classStr.push(classes.sunday);
          
          return (

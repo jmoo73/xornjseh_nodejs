@@ -57,10 +57,10 @@ class Home extends Component {
       );
 
       let individualCheckIn = null;
-      if (day) {
+      if (day !== 0) {
          individualCheckIn = (
             <SquareButton clicked={this.goToCheckInScreen}>
-               Individual check-in
+               Student check-in
             </SquareButton>
          );
       }
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
       gglLoading: state.ggl.loading,
       statsLoading: state.stats.loading,
       isAuthenticated: state.auth.token !== null,
-      personalAttendance: state.ggl.personalAttendance,
+      personalAttendance: state.ggl.personalAttendance, // After submitClicked is handled, inited.
       currClass: state.ggl.currClass,
       currClassID: state.ggl.currClassID,
       currBelt: state.ggl.currBelt,
