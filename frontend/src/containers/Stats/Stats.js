@@ -68,7 +68,6 @@ class Stats extends Component {
          spinner = (
             <React.Fragment>
                <Spinner />
-               <h3>Fetching attendance data...</h3>
             </React.Fragment>
          );
       }

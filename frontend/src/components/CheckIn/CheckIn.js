@@ -4,110 +4,127 @@ import WelcomeToClass from './WelcomeToClass/WelcomeToClass';
 import BeltSelect from './BeltSelect/BeltSelect';
 import SmallClassButton from './SmallClassButton/SmallClassButton';
 import Spinner from '../UI/Spinner/Spinner';
-import PersonalData from './PersonalData/PersonalData';
 import DayBar from '../DayBar/DayBar';
+import Button from '../UI/Button/Button';
 
 class CheckIn extends Component {
    state = {
-      isNameChosen: false,
       classState: null,
       beltState: null,
-      id: null,
+      id: null, // [ person.id, person.name ]
+      fullName: null,
+      doMatch: false,
    };
 
-   nameClicked = async (id, fullName) => {
-      this.setState({ isNameChosen: true, id });
+   whenSubmitClicked = async () => {
       await this.props.whenClassClicked(this.state.classState);
-      await this.props.nameClicked(id);
-      await this.props.fetchPersonalAttendance(
-         this.props.ggleID,
-         this.props.lastYearGglID,
-         [fullName]
-      );
-   };
-
-   whenSubmitClick = async () => {
+      await this.props.nameClicked(this.state.id);
       await this.props.whenSubmitClicked(
          this.props.ggleID,
          this.props.statsGglID,
          this.props.locationID,
-         this.props.currClass,
+         this.props.currClass, //
          this.props.currClassID,
          this.props.persons,
-         this.props.classAttender,
+         this.props.classAttender, //
          this.props.classToday
       ); // Saving the chosen attendants(inc. indivual) until now.
-      this.setState({ isNameChosen: false, beltState: null, id: null });
+      this.setState({
+         beltState: null,
+         fullName: null,
+         doMatch: false,
+         id: null,
+      });
    };
 
-   classStateChange = cls => {
-      this.setState({ classState: cls });
+   classSelect = cls => {
+      this.setState({
+         classState: cls,
+         beltState: null,
+         fullName: null,
+         doMatch: false,
+         id: null,
+      });
    };
 
-   beltClicked = belt => {
-      this.setState({ beltState: belt });
+   beltSelect = belt => {
+      this.setState({
+         beltState: belt,
+         fullName: null,
+         doMatch: false,
+         id: null,
+      });
+   };
+
+   firstSelect = (fullName, id) => {
+      this.setState({ fullName, id });
+   };
+
+   secondSelect = fullName => {
+      if (this.state.fullName === fullName) {
+         this.setState({ doMatch: true });
+      } else {
+         this.setState({ fullName: null, id: null, doMatch: false });
+      }
    };
 
    render() {
-      let logIn = null;
-      if (!this.state.isNameChosen) {
-         logIn = (
-            <div className={classes.checkInWrapper}>
-               <div className={classes.dot} onClick={this.props.backToAuthHome}>
-                  .
-               </div>
-               <div className={classes.dayBar}>
-                  <DayBar fontSize="fifteen" />
-               </div>
-               <SmallClassButton
-                  whenClassClicked={cls => this.classStateChange(cls)}
-                  classToday={this.props.classToday}
-                  currClass={this.state.classState}
-               />
-               {this.state.classState ? (
-                  <React.Fragment>
-                     <WelcomeToClass cls={this.state.classState} />
-                     <BeltSelect
-                        currBelt={this.state.beltState}
-                        beltClicked={this.beltClicked}
-                        nameClicked={this.nameClicked}
-                        persons={this.props.persons}
-                        beltState={this.state.beltState}
-                        attender={
-                           this.props.classAttender[this.state.classState]
-                        }
-                     />
-                  </React.Fragment>
-               ) : null}
+      let classesToday = (
+         <React.Fragment>
+            <div className={classes.dot} onClick={this.props.backToAuthHome}>
+               .
             </div>
+            <div className={classes.dayBar}>
+               <DayBar fontSize="fifteen" />
+            </div>
+            <SmallClassButton
+               whenClassClicked={this.classSelect}
+               classToday={this.props.classToday}
+               currClass={this.state.classState}
+            />
+         </React.Fragment>
+      );
+
+      let beltSelect = null;
+      if (this.state.classState) {
+         beltSelect = (
+            <React.Fragment>
+               <WelcomeToClass cls={this.state.classState} />
+               <BeltSelect
+                  persons={this.props.persons}
+                  beltState={this.state.beltState}
+                  isFullName={!!this.state.fullName}
+                  doMatch={this.state.doMatch}
+                  beltSelect={this.beltSelect}
+                  firstSelect={this.firstSelect}
+                  secondSelect={this.secondSelect}
+                  attender={this.props.classAttender[this.state.classState]}
+               />
+            </React.Fragment>
          );
       }
 
-      let personalData = null;
-      if (this.state.isNameChosen) {
-         if (this.props.personalAttendance.length !== 0) {
-            personalData = (
-               <PersonalData
-                  personalAttendance={this.props.personalAttendance}
-                  whenSubmitClick={this.whenSubmitClick}
-                  persons={this.props.persons}
-                  id={this.state.id}
-               />
-            );
-         } else if (!this.props.saving)
-            personalData = (
-               <React.Fragment>
-                  <Spinner />
-                  <h3>Fetching personal attendance data...</h3>
-               </React.Fragment>
-            );
+      let confirmBtn = '';
+      if (this.state.doMatch) {
+         confirmBtn = (
+            <Button
+               btnType="finalSubmit"
+               renderClickedState={true}
+               clicked={this.whenSubmitClicked}
+            >
+               {this.state.fullName} in {this.state.beltState}, Correct?
+            </Button>
+         );
       }
 
       return (
          <React.Fragment>
-            {logIn}
-            {personalData}
-            {this.props.saving ? <Spinner /> : null}
+            <div className={classes.checkInWrapper}>
+               {classesToday}
+               {beltSelect}
+               {confirmBtn}
+               {this.props.saving ? <Spinner /> : null}
+            </div>
          </React.Fragment>
       );
    }

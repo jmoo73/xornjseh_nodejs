@@ -1,0 +1,134 @@
+.wrapper {
+   z-index: 100;
+   display: flex;
+   flex-direction: column;
+   background-color: white;
+   width: 70%;
+   margin: 20px;
+}
+
+.line {
+   background-color: black;
+   opacity: 0.5;
+   height: 10px;
+   width: 100%;
+}
+
+.lineWrapper, .emptyList {
+   display: flex;
+   justify-content: center;
+   padding: 5px 5px 0px 5px;
+}
+
+.emptyList {
+   font-size: 30px;
+}
+
+.checkBox,
+.Name,
+.Beltcolor,
+.Membership {
+   display: flex;
+   align-items: center;
+   font-size: 15px;
+   margin: 0 3px;
+}
+
+.checkBox {
+   border-radius: 10px;
+   padding: 0 10px;
+   border: 1px solid black;
+}
+
+.checkBox:hover {
+   cursor: pointer;
+   background-color: black;
+   color: white;
+}
+
+.Name {
+   display: flex;
+   justify-content: flex-start;
+   width: 400px;
+   background-color: rgb(238, 238, 238);
+   padding: 0 10px;
+}
+
+.Beltcolor {
+   display: flex;
+   width: 100px;
+   background-color: rgb(238, 238, 238);
+   justify-content: center;
+   padding: 0 10px;
+}
+
+.Membership {
+   display: flex;
+   width: 50px;
+   background-color: rgb(238, 238, 238);
+   justify-content: center;
+   padding: 0 10px;
+}
+
+.addBtnWrapper {
+   display: flex;
+   justify-content: center;
+}
+
+.addBtn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(216, 151, 151);
+   font-size: 16px;
+   height: 40px;
+   width: 100px;
+   border-radius: 25px;
+   border: none;
+   color: white;
+   margin: 0 0 20px 0;
+   font-weight: bold;
+}
+
+.addBtn:focus {
+   outline: none;
+}
+
+.addBtn:active {
+   box-shadow: 0 10px #666;
+   transform: translateY(6px);
+}
+
+.submitBtnWrapper {
+   display: flex;
+   justify-content: center;
+}
+
+.submitBtn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(134, 128, 211);
+   font-size: 18px;
+   height: 40px;
+   width: 100px;
+   border-radius: 20px;
+   border: none;
+   color: white;
+   margin: 10px 0;
+   font-weight: bold;
+}
+
+.submitBtn:focus {
+   outline: none;
+}
+
+.submitBtn:active {
+   box-shadow: 0 10px #666;
+   transform: translateY(6px);
+}
+
+.memberDataWrapper {
+   display: flex;
+   justify-content: center;
+}

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import ChooseBeltColor from './ChooseBeltColor/ChooseBeltColor';
 import ChooseNames from './ChooseNames/ChooseNames';
 import ShowChosenNames from './ShowChosenNames/ShowChosenNames';
-import classes from './UpdateBeltColor.module.css';
+import classes from './UpdateBelts.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../UI/Spinner/Spinner';
 import BackDrop from '../../UI/BackDrop/BackDrop';
 
-class UpdateBeltColor extends Component {
+class UpdateBelts extends Component {
    state = {
       currBeltColor: 'White',
       testees: [], //[ ['BeltColor', index], ... ]
@@ -32,7 +32,7 @@ class UpdateBeltColor extends Component {
    triggerSave = async () => {
       await this.props.saveTestee(this.props.ggleID, this.state.testees);
       await this.props.onGgl(this.props.ggleID);
-      this.props.resetButtons('backHome');
+      this.props.resetBtn();
    };
 
    render() {
@@ -91,4 +91,4 @@ const mapDispatchToProps = dispatch => {
    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateBeltColor);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateBelts);

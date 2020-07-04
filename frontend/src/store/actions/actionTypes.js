@@ -12,6 +12,9 @@ export const MEM_SAVE_START = 'MEM_SAVE_START';
 export const MEM_SAVE_FINISH = 'MEM_SAVE_FINISH';
 export const MEM_LOGOUT = 'MEM_LOGOUT';
 export const CHECKIN_SUCCESS = 'CHECKIN_SUCCESS';
+export const ADD_TO_LIST = 'ADD_TO_LIST';
+export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
+export const CLEAR_LIST = 'CLEAR_LIST'
 
 export const GGL_LOAD_SUCCESS = 'GGL_LOAD_SUCCESS';
 export const GGL_LOAD_START = 'GGL_LOAD_START';

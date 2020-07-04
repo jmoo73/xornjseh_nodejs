@@ -1,10 +1,8 @@
-
-
 .checkInWrapper {
    display: flex;
-   align-items: center;
    flex-direction: column;
    width: 100%;
+   align-items: center;
    margin: 15px 0 0 0;
 }
 
@@ -12,6 +10,16 @@
    color: black;
    padding: 4px 8px 0 8px;
    margin: -10px 0 5px 0;
+}
+
+h3 {
+   position: fixed;
+   top: 40%;
+   width: 450px;
+   text-align: center;
+   left: calc(50% - 225px);
+   color: white;
+   z-index: 600;
 }
 
 .dot {

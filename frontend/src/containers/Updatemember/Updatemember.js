@@ -1,73 +1,86 @@
 import React, { Component } from 'react';
 import classes from './Updatemember.module.css';
-import AddNewMember from '../../components/Updatemember/AddNewMember/AddNewMember';
-import UpdateBeltColor from '../../components/Updatemember/UpdateBeltColor/UpdateBeltColor';
-import Spinner from '../../components/UI/Spinner/Spinner';
+import AddMembers from '../../components/Updatemember/AddMembers/AddMembers';
+import UpdateMembership from '../../components/Updatemember/UpdateMembership/UpdateMembership';
+import UpdateBelts from '../../components/Updatemember/UpdateBelts/UpdateBelts';
 import BackDrop from '../../components/UI/BackDrop/BackDrop';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
+let menu = ['onAddingMembers', 'onUpdatingMembership', 'onUpdatingBelts'];
+let menuName = ['Add members', 'Update membership', 'Update belts'];
 
 class Updatemember extends Component {
    state = {
-      left: false,
-      right: false,
-      saving: false,
+      clickedBtn: null,
+      savingInChild: false,
    };
 
-   resetButtons = opt => {
-      if (opt === 'startSaving') {
-         this.setState({ saving: true });
-      }
-      if (opt === 'finishSaving' || opt === 'backHome') {
-         this.setState({ right: false, left: false, saving: false });
-      }
+   savingInChild = () => {
+      this.setState({ savingInChild: true });
    };
 
-   toggleButtons = LR => {
-      if (LR === 'left') {
-         this.setState({ left: true });
-      } else {
-         this.setState({ right: true });
-      }
+   chooseBtn = btn => {
+      this.setState({ clickedBtn: btn });
+   };
+
+   resetBtn = () => {
+      this.setState({ clickedBtn: null, savingInChild: false });
    };
 
    render() {
-      let leftClass =
-         classes.leftButton + ' ' + (this.state.left ? classes.clicked : null);
-      let rightClass =
-         classes.rightButton + ' ' + (this.state.right ? classes.clicked : null);
+      let choice = null;
+      if (this.state.clickedBtn === menu[0])
+         choice = (
+            <AddMembers
+               resetBtn={this.resetBtn}
+               savingInChild={this.savingInChild}
+            />
+         );
+      if (this.state.clickedBtn === menu[1])
+         choice = (
+            <UpdateMembership
+               resetBtn={this.resetBtn}
+               saving={this.state.savingInChild}
+            />
+         );
+      if (this.state.clickedBtn === menu[2])
+         choice = (
+            <UpdateBelts
+               resetBtn={this.resetBtn}
+               saving={this.state.savingInChild}
+            />
+         );
+
+      let spinner = null;
+      if (this.state.savingInChild) spinner = <Spinner />;
 
       return (
          <React.Fragment>
-            <div className={classes.outerBox}>
+            <div className={classes.wrapper}>
                <div className={classes.buttonBox}>
-                  <button
-                     className={leftClass}
-                     onClick={() => this.toggleButtons('left')}
-                  >
-                     Add member
-                  </button>
-                  <button
-                     className={rightClass}
-                     onClick={() => this.toggleButtons('right')}
-                  >
-                     Update belt
-                  </button>
+                  {menu.map((el, index) => {
+                     let btnClassStr = [classes.baseBtn];
+                     if (el === this.state.clickedBtn)
+                        btnClassStr.push(classes.clicked);
+                     return (
+                        <button
+                           key={el}
+                           className={btnClassStr.join(' ')}
+                           onClick={() => this.chooseBtn(el)}
+                        >
+                           {menuName[index]}
+                        </button>
+                     );
+                  })}
                </div>
+
                <BackDrop
-                  show={this.state.left && !this.state.saving}
-                  clicked={() => this.resetButtons('backHome')}
+                  show={this.state.clickedBtn && !this.state.savingInChild}
+                  clicked={this.resetBtn}
                />
-               {this.state.left ? (
-                  <AddNewMember
-                     resetButtons={this.resetButtons}
-                     isSaving={this.state.saving}
-                  />
-               ) : null}
 
-               {this.state.right ? (
-                  <UpdateBeltColor show={this.state.right} resetButtons={this.resetButtons} />
-               ) : null}
-
-               {this.state.saving ? <Spinner /> : null}
+               {choice}
+               {spinner}
             </div>
          </React.Fragment>
       );

@@ -49,6 +49,8 @@ const colors = [
    'Black',
 ];
 
+const memberships = ['BB', 'MP', '1YR', '1MO'];
+
 const now = new Date();
 const thisYear = now.getFullYear();
 const lastYear = thisYear - 1;
@@ -190,7 +192,7 @@ function makeMonthlyDataList() {
                start: false,
             });
             id++;
-         } else if (now.getMonth() < month ) {
+         } else if (now.getMonth() < month) {
             // for last days of prev month.
             monthlyList.push({
                id,
@@ -240,6 +242,7 @@ export {
    daysTot,
    daysOfThisYear,
    daysOfLastYear,
+   memberships,
    weekDates, //Function!!
    makeDateList,
    makeMonthlyDataList,

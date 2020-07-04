@@ -1,67 +1,86 @@
 import React, { Component } from 'react';
 import classes from './NameSelect.module.css';
 import RoundButton from '../../UI/Button/RoundButton';
-import Button from '../../UI/Button/Button';
+import * as _ from 'lodash';
 
 class NameSelect extends Component {
-   state = {
-      id: null, // [ person.id, person.name ]
-      fullName: null,
-      beltColor: null,
+   firstNameChosen = (id, firstFullName, beltColor) => {
+      this.setState({ id, firstFullName, beltColor, doMatch: false });
    };
 
-   nameChosen = (id, fullName, beltColor) => {
-      this.setState({ id, fullName, beltColor });
+   secondNameChosen = secondFullName => {
+      if (this.state.firstFullName === secondFullName) {
+         this.setState({ doMatch: true });
+      } else {
+         this.setState({
+            id: null,
+            firstFullName: null,
+            beltColor: null,
+            doMatch: false,
+         });
+      }
    };
 
    render() {
       let attenderIdList = this.props.attender.map(per => per[1]);
-      let members = (
-         <div className={classes.personWrapper}>
-            {this.props.persons.map(person => (
-               <RoundButton
-                  type="nameBig"
-                  key={person.id}
-                  makeBiggerButton={this.state.id === person.id ? true : false}
-                  chosen={
-                     attenderIdList.includes(person.id) ||
-                     this.props.currBelt !== person.belt
-                  }
-                  beltColor={person.belt}
-                  clicked={() =>
-                     this.nameChosen(person.id, person.name, person.belt)
-                  }
-               >
-                  {person.name.split(' ')[0]}
-               </RoundButton>
-            ))}
+      let firstName = (
+         <div className={classes.firstOuterWrapper}>
+            <div className={classes.firstNameNote}>
+               Choose your first name...
+            </div>
+            <div className={classes.firstNameWrapper}>
+               {_.shuffle(
+                  this.props.persons.map(person => (
+                     <RoundButton
+                        type="nameBig"
+                        key={person.id}
+                        chosen={
+                           attenderIdList.includes(person.id) ||
+                           this.props.currBelt !== person.belt
+                        }
+                        beltColor={person.belt}
+                        clicked={() =>
+                           this.props.firstSelect(person.name, person.id)
+                        }
+                     >
+                        {person.name.split(' ')[0]}
+                     </RoundButton>
+                  ))
+               )}
+            </div>
          </div>
       );
 
-      let submitButton = null;
-      if (
-         this.state.id !== null &&
-         this.props.currBelt === this.state.beltColor
-      ) {
-         submitButton = (
-            <div className={classes.buttonWrapper}>
-               <Button
-                  btnType="confirmName"
-                  renderClickedState={true}
-                  clicked={() =>
-                     this.props.nameClicked(this.state.id, this.state.fullName)
-                  }
-               >
-                  {this.state.fullName}, correct?
-               </Button>
+      let secondName = (
+         <div className={classes.firstOuterWrapper}>
+            <div className={classes.secondNameNote}>
+               Choose your second name...
             </div>
-         );
-      }
+            <div className={classes.secondNameWrapper}>
+               {_.shuffle(
+                  this.props.persons.map(person => (
+                     <RoundButton
+                        type="nameBig"
+                        key={person.id}
+                        chosen={
+                           attenderIdList.includes(person.id) ||
+                           this.props.currBelt !== person.belt
+                        }
+                        beltColor={person.belt}
+                        clicked={() => this.props.secondSelect(person.name)}
+                     >
+                        {person.name.split(' ')[1]}
+                     </RoundButton>
+                  ))
+               )}
+            </div>
+         </div>
+      );
 
       return (
          <div className={classes.wrapper}>
-            {members}
-            {submitButton}
+            {!this.props.isFullName && !this.props.doMatch && firstName}
+            {this.props.isFullName && !this.props.doMatch && secondName}
          </div>
       );
    }

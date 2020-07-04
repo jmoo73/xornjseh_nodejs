@@ -29,4 +29,7 @@ export {
   initMember,
   checkIn,
   fetchAttData,
+  addToList,
+  removeFromList,
+  saveAndClearList,
 } from './mem'

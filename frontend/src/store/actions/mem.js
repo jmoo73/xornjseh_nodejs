@@ -80,3 +80,23 @@ export const fetchAttData = (fullName, ggleID, lastYearGglID) => {
       dispatch(loadFinish());
    };
 };
+
+export const addToList = member => {
+   return { type: actionTypes.ADD_TO_LIST, member };
+};
+
+export const removeFromList = index => {
+   return { type: actionTypes.REMOVE_FROM_LIST, index };
+};
+
+export const saveAndClearList = (ggleID, newMembersList) => {
+   return async dispatch => {
+      dispatch(saveStart());
+      await axInstance.post('/gglThisYear/add-new-member', {
+         ggleID,
+         newMembersList,
+      });
+      dispatch({ type: actionTypes.CLEAR_LIST });
+      dispatch(saveFinish());
+   };
+};

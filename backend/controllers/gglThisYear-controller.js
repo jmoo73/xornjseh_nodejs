@@ -83,16 +83,22 @@ const saveTestees = async (req, res, next) => {
 
 const personalAttendance = async (req, res, next) => {
    const { ggleID, lastYearGglID, fullNameList } = req.body;
-   const allListList = await gglIO.fetchAttendance(ggleID, lastYearGglID, fullNameList);
+   const allListList = await gglIO.fetchAttendance(
+      ggleID,
+      lastYearGglID,
+      fullNameList
+   );
 
    res.json({ personalAttendance: allListList });
 };
 
 const addNewMember = async (req, res, next) => {
-   const { ggleID, newMember } = req.body;
+   const { ggleID, newMembersList } = req.body;
 
    const sheet = await gglIO.getSheetObj(ggleID, 0);
-   await sheet.addRow(newMember);
+   for (let newMember of newMembersList) {
+      await sheet.addRow(newMember);
+   }
 
    res.json({ message: 'Member was added successfully.' });
 };

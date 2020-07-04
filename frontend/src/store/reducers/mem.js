@@ -11,6 +11,8 @@ const initialState = {
    classTitle: null, // [ 'Class1', ... ]
    loading: false,
    saving: false,
+   // [ { Name: 'Jeongmoo Park', Beltcolor: 'Bodon', Membership: 'MP', StartedOn: date }, ... ]
+   newMembersList: [],
 };
 
 const loadStart = (state, action) => {
@@ -46,6 +48,31 @@ const memLogout = (state, action) => {
    return updateObject(state, initialState);
 };
 
+const addNewMemberToList = (state, action) => {
+   let nameList = [...state.newMembersList];
+   let member = {};
+
+   member.Name = action.member.Name;
+   member.Beltcolor = action.member.Beltcolor;
+   member.Membership = action.member.Membership;
+   member.StartedOn = action.member.StartedOn;
+
+   nameList.push(member);
+   return updateObject(state, { newMembersList: nameList });
+};
+
+const removeMemberFromList = (state, action) => {
+   let nameList = [...state.newMembersList];
+
+   nameList.splice(action.index, 1);
+
+   return updateObject(state, { newMembersList: nameList });
+};
+
+const clearList = (state, action) => {
+   return updateObject(state, { newMembersList: [] });
+};
+
 const reducer = (state = initialState, action) => {
    switch (action.type) {
       case actionTypes.MEM_LOAD_START:
@@ -62,6 +89,12 @@ const reducer = (state = initialState, action) => {
          return memLogout(state, action);
       case actionTypes.CHECKIN_SUCCESS:
          return checkInSuccess(state, action);
+      case actionTypes.ADD_TO_LIST:
+         return addNewMemberToList(state, action);
+      case actionTypes.REMOVE_FROM_LIST:
+         return removeMemberFromList(state, action);
+      case actionTypes.CLEAR_LIST:
+         return clearList(state, action);
       default:
          return state;
    }

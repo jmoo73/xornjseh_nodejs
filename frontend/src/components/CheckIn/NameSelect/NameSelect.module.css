@@ -1,30 +1,30 @@
 .wrapper {
    display: flex;
-   width: 80%;
    flex-direction: column;
+   width: 100%;
    margin: 20px 0 0 0;
 }
 
-.personWrapper {
+.firstOuterWrapper, .secondOuterWrapper {
    display: flex;
-   flex-wrap: wrap;
+   align-items: center;
+   flex-direction: column;
 }
 
-.buttonWrapper {
+.firstNameNote, .secondNameNote {
    display: flex;
    justify-content: center;
-   margin: 20px 0 0 0;
+   font-size: 30px;
+   font-weight: bold;
+   width: 100%;
+   height: 80px;
+   align-items: center;
+   color: white;
+   background-color: rgb(180, 180, 180);
 }
 
-.buttonMain {
-   width: 100px;
-   height: 100px;
-   background-color: rgb(202, 176, 126);
-}
-
-/* ipad or monitor */
-@media (max-width: 1024px) {
-   .wrapper {
-      width: 95%;
-   }
+.firstNameWrapper, .secondNameWrapper {
+   display: flex;
+   flex-wrap: wrap;
+   width: 90%;
 }

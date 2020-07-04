@@ -1,0 +1,47 @@
+.inputWrapper {
+   display: flex;
+   padding: 20px 0;
+}
+
+.inputName {
+   width: 400px;
+   height: 30px;
+   margin: 10px;
+   font-size: 16px;
+   border: none;
+   border-bottom: 1px solid black;
+   padding: 0 10px;
+}
+
+.inputName:focus {
+   outline: none;
+   border-bottom: 4px solid black;
+}
+
+.selectBelt {
+   width: 100px;
+   height: 30px;
+   margin: 10px;
+   font-size: 14px;
+   border: none;
+   border-bottom: 1px solid black;
+}
+
+.selectBelt:focus {
+   outline: none;
+   border-bottom: 4px solid black;
+}
+
+.selectMembership {
+   width: 100px;
+   height: 30px;
+   margin: 10px;
+   font-size: 14px;
+   border: none;
+   border-bottom: 1px solid black;
+}
+
+.selectMembership:focus {
+   outline: none;
+   border-bottom: 4px solid black;
+}

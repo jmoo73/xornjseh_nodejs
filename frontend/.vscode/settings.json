@@ -4,5 +4,6 @@
   "prettier.singleQuote": true,
   "editor.minimap.maxColumn": 90,
   "editor.tabSize": 3,
-  "prettier.tabWidth": 3
+  "prettier.tabWidth": 3,
+  "editor.wordWrapColumn": 100
 }

@@ -1,13 +1,23 @@
+.outerWrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
 .wrapper {
    display: flex;
    flex-wrap: wrap;
-   width: 80%;
+   width: 90%;
    margin: 10px 0 0 0;
 }
 
-/* ipad or monitor */
-@media (max-width: 1024px) {
-   .wrapper {
-      width: 95%;
-   }
+.chooseBeltNote {
+   display: flex;
+   justify-content: center;
+   font-size: 30px;
+   font-weight: bold;
+   width: 100%;
+   height: 80px;
+   align-items: center;
+   color: white;
+   background-color: rgb(180, 180, 180);
 }

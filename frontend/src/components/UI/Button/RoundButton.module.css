@@ -31,6 +31,11 @@
    outline: none;
 }
 
+.BeltButtonBig:active {
+   box-shadow: 0 10px #666;
+   transform: translateY(6px);
+}
+
 .BeltChosen,
 .BtnPressed {
    box-shadow: 0 10px #666;

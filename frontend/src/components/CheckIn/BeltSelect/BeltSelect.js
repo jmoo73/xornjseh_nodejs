@@ -1,41 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './BeltSelect.module.css';
 import { colors } from '../../../shared/refData';
 import RoundButton from '../../UI/Button/RoundButton';
 import NameSelect from '../NameSelect/NameSelect';
-// import Announcement from './Announcement/Announcement'
 
-const BeltSelect = props => {
-   let beltCollection = (
-      <div className={classes.wrapper}>
-         {colors.map(clr => (
-            <RoundButton
-               key={clr}
-               type="beltBig"
-               beltColor={clr}
-               chosen={props.currBelt === clr}
-               clicked={() => props.beltClicked(clr)}
-            />
-         ))}
-      </div>
-   );
+class BeltSelect extends Component {
+   render() {
+      let beltCollection = (
+         <div className={classes.wrapper}>
+            {colors.map(clr => (
+               <RoundButton
+                  key={clr}
+                  type="beltBig"
+                  beltColor={clr}
+                  clicked={() => this.props.beltSelect(clr)}
+               />
+            ))}
+         </div>
+      );
 
-   // let announcement = !props.beltState ? <Announcement /> : null;
-   let nameSelect = props.beltState ? (
-      <NameSelect
-         persons={props.persons}
-         nameClicked={props.nameClicked}
-         currBelt={props.currBelt}
-         attender={props.attender}
-      />
-   ) : null;
+      let nameSelect = this.props.beltState ? (
+         <NameSelect
+            persons={this.props.persons}
+            currBelt={this.props.beltState}
+            firstSelect={this.props.firstSelect}
+            secondSelect={this.props.secondSelect}
+            attender={this.props.attender}
+            isFullName={this.props.isFullName}
+            doMatch={this.props.doMatch}
+         />
+      ) : (
+         <div className={classes.chooseBeltNote}>Choose your belt color...</div>
+      );
 
-   return (
-      <React.Fragment>
-         {beltCollection}
-         {nameSelect}
-      </React.Fragment>
-   );
-};
+      return (
+         <React.Fragment>
+            <div className={classes.outerWrapper}>
+               {beltCollection}
+               {nameSelect}
+            </div>
+         </React.Fragment>
+      );
+   }
+}
 
 export default BeltSelect;
