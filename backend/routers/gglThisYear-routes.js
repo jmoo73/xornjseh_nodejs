@@ -8,6 +8,8 @@ router.post('/update-persons', gglThisYear.updatePersons);
 
 router.post('/save-testees', gglThisYear.saveTestees);
 
+router.post('/update-membership', gglThisYear.updateMembership);
+
 router.post('/personal-attendance', gglThisYear.personalAttendance);
 
 router.post('/add-new-member', gglThisYear.addNewMember);

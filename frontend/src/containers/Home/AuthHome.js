@@ -19,7 +19,11 @@ class Home extends Component {
       // dataLoaded is needed to avoid unnecessary loading after login-loading.
       if (!this.props.dataLoaded && this.props.isAuthenticated && day) {
          await this.props.onStats(this.props.statsGglID, this.props.locationID);
-         await this.props.onGgl(this.props.ggleID);
+         await this.props.onGgl(
+            this.props.ggleID,
+            this.props.membershipGglID,
+            this.props.locationID
+         );
       }
    }
 
@@ -101,6 +105,7 @@ const mapStateToProps = state => {
       gglSaving: state.ggl.saving,
       classAttender: state.ggl.classAttender,
       ggleID: state.auth.ggleID,
+      membershipGglID: state.auth.membershipGglID,
       statsGglID: state.auth.statsGglID,
       locationID: state.auth.locationID,
       lastYearGglID: state.auth.lastYearGglID,
@@ -110,7 +115,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
+      onGgl: (ggleID, membershipGglID, locationID) =>
+         dispatch(actions.fetchGglDocs(ggleID, membershipGglID, locationID)),
       onStats: (statsGglID, locationID) =>
          dispatch(actions.fetchStat(statsGglID, locationID)),
       fetchPersonalAttendance: (ggleID, lastYearGglID, fullNameList) =>

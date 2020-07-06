@@ -54,6 +54,18 @@
    font-size: 10px;
 }
 
+.statName {
+   display: flex;
+   justify-content: center;
+   width: 100px;
+   height: 66px;
+   align-items: center;
+   margin: 0 10px 0 0;
+   border: none;
+   border-radius: 10px;
+   font-size: 14px;
+}
+
 .White {
    color: black;
    border: 1px solid black;
@@ -92,11 +104,11 @@
       to bottom,
       yellow,
       yellow 30%,
-      green 30%,
-      green 70%,
+      rgb(51, 160, 51) 30%,
+      rgb(51, 160, 51) 70%,
       yellow 70%
    );
-   color: white;
+   color: black;
 }
 
 .Green {
@@ -160,8 +172,6 @@
    color: white;
 }
 
-
-
 @media (min-width: 400px) {
    .BeltButton {
       font-size: 16px;
@@ -183,6 +193,7 @@
    .BeltNum {
       font-size: 20px;
       font-weight: bold;
+      width: 60px;
    }
 
    .BeltButtonBig {
@@ -208,6 +219,12 @@
       border-radius: 70px;
       font-size: 30px;
       border: 7px solid rgb(167, 165, 165);
+   }
+}
+
+@media (min-width: 1025px) {
+   .BeltNum {
+      width: 80px;
    }
 
 }

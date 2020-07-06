@@ -30,22 +30,26 @@ class NameSelect extends Component {
             </div>
             <div className={classes.firstNameWrapper}>
                {_.shuffle(
-                  this.props.persons.map(person => (
-                     <RoundButton
-                        type="nameBig"
-                        key={person.id}
-                        chosen={
-                           attenderIdList.includes(person.id) ||
-                           this.props.currBelt !== person.belt
-                        }
-                        beltColor={person.belt}
-                        clicked={() =>
-                           this.props.firstSelect(person.name, person.id)
-                        }
-                     >
-                        {person.name.split(' ')[0]}
-                     </RoundButton>
-                  ))
+                  this.props.persons.map(person => {
+                     if (person.status === 'ACTIVE') {
+                        return (
+                           <RoundButton
+                              type="nameBig"
+                              key={person.id}
+                              chosen={
+                                 attenderIdList.includes(person.id) ||
+                                 this.props.currBelt !== person.belt
+                              }
+                              beltColor={person.belt}
+                              clicked={() =>
+                                 this.props.firstSelect(person.name, person.id)
+                              }
+                           >
+                              {person.name.split(' ')[0]}
+                           </RoundButton>
+                        );
+                     } else return null;
+                  })
                )}
             </div>
          </div>
@@ -58,20 +62,26 @@ class NameSelect extends Component {
             </div>
             <div className={classes.secondNameWrapper}>
                {_.shuffle(
-                  this.props.persons.map(person => (
-                     <RoundButton
-                        type="nameBig"
-                        key={person.id}
-                        chosen={
-                           attenderIdList.includes(person.id) ||
-                           this.props.currBelt !== person.belt
-                        }
-                        beltColor={person.belt}
-                        clicked={() => this.props.secondSelect(person.name)}
-                     >
-                        {person.name.split(' ')[1]}
-                     </RoundButton>
-                  ))
+                  this.props.persons.map(person => {
+                     if (person.status === 'ACTIVE') {
+                        return (
+                           <RoundButton
+                              type="nameBig"
+                              key={person.id}
+                              chosen={
+                                 attenderIdList.includes(person.id) ||
+                                 this.props.currBelt !== person.belt
+                              }
+                              beltColor={person.belt}
+                              clicked={() =>
+                                 this.props.secondSelect(person.name)
+                              }
+                           >
+                              {person.name.split(' ')[1]}
+                           </RoundButton>
+                        );
+                     } else return null;
+                  })
                )}
             </div>
          </div>

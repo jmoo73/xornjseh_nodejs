@@ -13,6 +13,7 @@ const initialState = {
    locationID: null,
    ggleID: null,
    statsGglID: null,
+   membershipGglID: null,
    lastYearGglID: null,
    location: null,
    fullName: null,
@@ -52,6 +53,7 @@ const gglIdFetchSuccess = (state, action) => {
    return updateObject(state, {
       ggleID: action.ggleID,
       statsGglID: action.statsGglID,
+      membershipGglID: action.membershipGglID,
       location: action.location,
       locationID: action.locationID,
       lastYearGglID: action.lastYearGglID,

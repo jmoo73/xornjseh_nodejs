@@ -28,6 +28,7 @@ const login = async (req, res, next) => {
    const fetchSuccess = {
       ggleID: locData.thisYear.ggleSheetID,
       statsGglID: locData.stats.ggleSheetID,
+      membershipGglID: locData.membership.ggleSheetID,
       location: locData.location,
       locationID: locData.locationID,
       lastYearGglID: locData.lastYear.ggleSheetID,

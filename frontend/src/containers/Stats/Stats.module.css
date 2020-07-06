@@ -1,13 +1,68 @@
 .wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   width: 100%;
+}
+
+.chooseWrapper {
+   display: flex;
+   width: 80%;
+   flex-direction: column;
+   justify-content: center;
+   margin: 0 0 20px 0;
+}
+
+.chooseColor, .chooseMembership {
+  display: flex;
+  justify-content: center;
+}
+
+.membershipBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 100%;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 6px 3px;
+  margin: 10px 5px;
+  width: 200px;
+  height: 50px;
+  color: black;
+  background-color: white;
+  border: 1px solid grey;
 }
 
-.chooseColor {
-   display: flex;
-   flex-wrap: wrap;
-   margin: 0 0 20px 0;
- }
+.membershipBtn:focus {
+  outline: none;
+}
+
+.BB {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.MP {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.msTitle {
+  font-size: 14px;
+}
+
+.msNumber {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.chosen {
+   box-shadow: 0 10px #666;
+   transform: translateY(6px);
+}

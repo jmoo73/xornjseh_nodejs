@@ -49,7 +49,14 @@ const colors = [
    'Black',
 ];
 
-const memberships = ['BB', 'MP', '1YR', '1MO'];
+const memberships = ['1MO', '1YR', 'BBP', 'MP'];
+const membershipsTitle = [
+   '1-month trial',
+   '1-year program',
+   'Black belt program',
+   'Master Program',
+];
+const status = ['ACTIVE', 'SUSPEND', 'DROPOUT'];
 
 const now = new Date();
 const thisYear = now.getFullYear();
@@ -243,6 +250,8 @@ export {
    daysOfThisYear,
    daysOfLastYear,
    memberships,
+   membershipsTitle,
+   status,
    weekDates, //Function!!
    makeDateList,
    makeMonthlyDataList,

@@ -7,7 +7,7 @@ import BackDrop from '../../components/UI/BackDrop/BackDrop';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 let menu = ['onAddingMembers', 'onUpdatingMembership', 'onUpdatingBelts'];
-let menuName = ['Add members', 'Update membership', 'Update belts'];
+let menuName = ['Add members', 'Update memberships', 'Update belts'];
 
 class Updatemember extends Component {
    state = {
@@ -33,14 +33,21 @@ class Updatemember extends Component {
          choice = (
             <AddMembers
                resetBtn={this.resetBtn}
-               savingInChild={this.savingInChild}
             />
          );
+         // updateMembership.js in backend
+         // const { ggleID, memberList } = req.body;
+         // const gglThisYear = await gglIO.readSheet(ggleID, 0);
+      
+         // memberList.forEach(async (member) => {
+         //    let row = gglThisYear[member.id];
+         //    row.Membership = member.Membership;
+         //    row.Status = member.Status;
+      
       if (this.state.clickedBtn === menu[1])
          choice = (
             <UpdateMembership
                resetBtn={this.resetBtn}
-               saving={this.state.savingInChild}
             />
          );
       if (this.state.clickedBtn === menu[2])
@@ -62,6 +69,9 @@ class Updatemember extends Component {
                      let btnClassStr = [classes.baseBtn];
                      if (el === this.state.clickedBtn)
                         btnClassStr.push(classes.clicked);
+                     if (el === 'onAddingMembers') btnClassStr.push(classes.red);
+                     if (el === 'onUpdatingMembership') btnClassStr.push(classes.green);
+                     if (el === 'onUpdatingBelts') btnClassStr.push(classes.blue);
                      return (
                         <button
                            key={el}

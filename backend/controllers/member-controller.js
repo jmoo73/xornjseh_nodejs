@@ -32,7 +32,7 @@ const auth = async (req, res, next) => {
    }
 
    if (!exist) {
-      res.json({ message: 'Name not exists (Check spell!).' });
+      res.json({ message: `Can't find ${fullName} (Check spell or membership status!).` });
       return next();
    }
 

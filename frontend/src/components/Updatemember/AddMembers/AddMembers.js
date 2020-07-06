@@ -19,7 +19,7 @@ class AddMembers extends Component {
    };
 
    addToList = () => {
-      this.props.addToList({ ...this.state.member, StartedOn: date });
+      this.props.addToList({ ...this.state.member, StartedOn: date, Status: 'ACTIVE' });
       this.setState({
          member: {
             ...this.state.member,
@@ -96,6 +96,7 @@ class AddMembers extends Component {
          this.state.member.Beltcolor !== '' &&
          this.state.member.Membership !== ''
       ) {
+         
          addBtn = (
             <div className={classes.addBtnWrapper}>
                <button className={classes.addBtn} onClick={this.addToList}>

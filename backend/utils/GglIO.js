@@ -1,4 +1,4 @@
-const { days, thisYear, makeMonthlyDataList } = require('./refData');
+const { days, thisYear, colors, makeMonthlyDataList } = require('./refData');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const creds = require('./client_secret.json');
 
@@ -6,6 +6,7 @@ const now = new Date();
 const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 const xxxDay = days[now.getDay()];
 
+// Needed to update information.
 async function readSheet(docID, index) {
    const doc = new GoogleSpreadsheet(docID);
    await doc.useServiceAccountAuth(creds);
@@ -16,6 +17,7 @@ async function readSheet(docID, index) {
    return rows;
 }
 
+// Needed to add row.
 async function getSheetObj(docID, index) {
    const doc = new GoogleSpreadsheet(docID);
    await doc.useServiceAccountAuth(creds);
@@ -30,7 +32,10 @@ const doesMemberExist = async (fullName, ggleID) => {
    let doesExist = false;
 
    for (let index = 0; index < gglThisYear.length; index++) {
-      if (gglThisYear[index].Name === fullName) {
+      if (
+         gglThisYear[index].Name === fullName &&
+         gglThisYear[index].Status === 'ACTIVE'
+      ) {
          doesExist = true;
       }
    }
@@ -52,6 +57,8 @@ const fetchAttendance = async (ggleID, lastYearGglID, fullNameList) => {
       let belt;
       let startedOn;
       let testedOn;
+      let status;
+      let membership;
       // m = 2, 1, 0
       for (let m = allList.length - 1; m >= 0; m--) {
          // dateList = [ { id: 0, date: 'x/x/x', day: 'Sunday', attendance: ['x', ... ], needDataFetch: true, test: true, start: false }, ... ]
@@ -67,6 +74,8 @@ const fetchAttendance = async (ggleID, lastYearGglID, fullNameList) => {
                      id = index;
                      belt = gglSheet[index].Beltcolor; // belt for memberAuth visualization
                      startedOn = gglSheet[index].StartedOn;
+                     status = gglSheet[index].Status;
+                     membership = gglSheet[index].Membership;
                      testedOn = gglSheet[index].TestedOn;
                      break;
                   }
@@ -94,7 +103,15 @@ const fetchAttendance = async (ggleID, lastYearGglID, fullNameList) => {
          id = null;
       }
       // eqv. to [ fullName, allList ]
-      allListList.push([fullName, allList, belt, startedOn, testedOn]);
+      allListList.push([
+         fullName,
+         allList,
+         belt,
+         startedOn,
+         testedOn,
+         status,
+         membership,
+      ]);
    }
    return allListList;
 };
@@ -103,17 +120,17 @@ const initMem = async (ggleID, fullName) => {
    let className = [];
    let classTime = [];
    let classTitle = [];
-   
+
    const gglThisYear = await readSheet(ggleID, 0);
    const gglClassTable = await readSheet(ggleID, 1);
    const gglTimeTable = await readSheet(ggleID, 2);
-   
+
    for (let i = 0; i < gglClassTable.length; i++) {
       classTime.push(gglTimeTable[i][xxxDay].trim());
       className.push(gglClassTable[i][xxxDay].trim());
       classTitle.push(gglClassTable[i].Classes.trim());
    }
-   
+
    const patt = /[/$#][^/$#!]*/g;
    let checkedIn = [];
    let belt;
@@ -131,8 +148,64 @@ const initMem = async (ggleID, fullName) => {
    return { className, classTime, classTitle, checkedIn, belt };
 };
 
+const logMembership = async (
+   membershipGglID,
+   locationID,
+   memberships,
+   persons
+) => {
+   const gglMembership = await readSheet(membershipGglID, locationID);
+   let index;
+
+   for (let rowNum in gglMembership) {
+      if (gglMembership[rowNum].Date === date) {
+         index = rowNum;
+         break;
+      }
+   }
+
+   for (let ms of memberships) {
+      let countMembership = 0;
+      for (let person of persons) {
+         if (
+            person.membership === ms &&
+            person.status !== 'DROPOUT' &&
+            person.status !== 'SUSPEND'
+         ) {
+            countMembership++;
+         }
+      }
+      gglMembership[index][ms] = countMembership;
+   }
+
+   for (let color of colors) {
+      let countColor = 0;
+      for (let person of persons) {
+         if (
+            person.belt === color &&
+            person.status !== 'DROPOUT' &&
+            person.status !== 'SUSPEND'
+         )
+            countColor++;
+      }
+      gglMembership[index][color] = countColor;
+   }
+
+   let countSUSPEND = 0;
+   let countTOTAL = 0;
+   for (let person of persons) {
+      if (person.status !== 'DROPOUT' && person.status !== 'SUSPEND') countTOTAL++;
+      if (person.status === 'SUSPEND') countSUSPEND++;
+   }
+   gglMembership[index].SUSPEND = countSUSPEND;
+   gglMembership[index].TOTAL = countTOTAL;
+
+   await gglMembership[index].save();
+};
+
 exports.readSheet = readSheet;
 exports.getSheetObj = getSheetObj;
 exports.fetchAttendance = fetchAttendance;
 exports.doesMemberExist = doesMemberExist;
 exports.initMem = initMem;
+exports.logMembership = logMembership;

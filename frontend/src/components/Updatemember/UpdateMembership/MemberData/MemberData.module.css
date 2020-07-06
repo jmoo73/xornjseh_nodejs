@@ -27,7 +27,16 @@
    border-bottom: 1px solid black;
 }
 
-.selectBelt:focus {
+.selectName {
+   width: 180px;
+   height: 30px;
+   margin: 10px;
+   font-size: 14px;
+   border: none;
+   border-bottom: 1px solid black;
+}
+
+.selectBelt:focus, .selectName:focus {
    outline: none;
    border-bottom: 4px solid black;
 }
@@ -41,7 +50,21 @@
    border-bottom: 1px solid black;
 }
 
+.selectStatus {
+   width: 90px;
+   height: 30px;
+   margin: 10px;
+   font-size: 14px;
+   border: none;
+   border-bottom: 1px solid black;
+}
+
 .selectMembership:focus {
+   outline: none;
+   border-bottom: 4px solid black;
+}
+
+.selectStatus:focus {
    outline: none;
    border-bottom: 4px solid black;
 }

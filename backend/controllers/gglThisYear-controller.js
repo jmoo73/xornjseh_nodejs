@@ -5,12 +5,20 @@ const now = new Date();
 const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 
 const initPersons = async (req, res, next) => {
-   const { ggleID, classToday } = req.body;
+   const {
+      ggleID,
+      membershipGglID,
+      memberships,
+      locationID,
+      classToday,
+   } = req.body;
    const gglThisYear = await gglIO.readSheet(ggleID, 0);
 
    let classAttender = {};
-   for (let cls of classToday) {
-      classAttender[cls[1]] = [];
+   if (classToday.length !== 0) {
+      for (let cls of classToday) {
+         classAttender[cls[1]] = [];
+      }
    }
 
    const persons = gglThisYear.map((row, index) => {
@@ -19,6 +27,8 @@ const initPersons = async (req, res, next) => {
 
       person.name = row.Name;
       person.belt = row.Beltcolor;
+      person.membership = row.Membership;
+      person.status = row.Status;
       person.id = index;
       person.startedOn = row.StartedOn ? row.StartedOn : '';
       person.testedOn = row.TestedOn ? row.TestedOn : '';
@@ -37,6 +47,13 @@ const initPersons = async (req, res, next) => {
       return person;
    });
 
+   if (membershipGglID)
+      await gglIO.logMembership(
+         membershipGglID,
+         locationID,
+         memberships,
+         persons
+      );
    res.json({ persons, classAttender });
 };
 
@@ -78,7 +95,22 @@ const saveTestees = async (req, res, next) => {
       await row.save();
    });
 
-   res.json({ message: 'Updated successfully.' });
+   res.json({ message: 'Belt color updated successfully.' });
+};
+
+const updateMembership = async (req, res, next) => {
+   const { ggleID, memberList } = req.body;
+   const gglThisYear = await gglIO.readSheet(ggleID, 0);
+
+   memberList.forEach(async (member) => {
+      let row = gglThisYear[member.id];
+      row.Membership = member.Membership;
+      row.Status = member.Status;
+
+      await row.save();
+   });
+
+   res.json({ message: 'Membership Updated successfully.' });
 };
 
 const personalAttendance = async (req, res, next) => {
@@ -106,5 +138,6 @@ const addNewMember = async (req, res, next) => {
 exports.initPersons = initPersons;
 exports.updatePersons = updatePersons;
 exports.saveTestees = saveTestees;
+exports.updateMembership = updateMembership;
 exports.personalAttendance = personalAttendance;
 exports.addNewMember = addNewMember;

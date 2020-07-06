@@ -3,9 +3,17 @@ import classes from './CalendarBelt.module.css';
 import Record from './Record/Record';
 
 const PersonalRecord = props => {
-
    let calendar = props.data.map(member => {
-      return <Record key={member[0]} name={member[0]} data={member[1]} />;
+      return (
+         <Record
+            key={member[0]}
+            name={member[0]}
+            belt={member[2]}
+            data={member[1]}
+            status={member[5]}
+            membership={member[6]}
+         />
+      );
    });
 
    const sevenWeeks = () => {

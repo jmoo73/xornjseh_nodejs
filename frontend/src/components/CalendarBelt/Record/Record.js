@@ -1,11 +1,20 @@
 import React from 'react';
 import classes from './Record.module.css';
+import RoundButton from '../../UI/Button/RoundButton';
 
 const now = new Date();
 const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 
 const LinearCalendar = props => {
-   let name = <div className={classes.name}>{props.name.split(' ')[0]}</div>;
+   let name = (
+      <RoundButton type="statName" beltColor={props.belt}>
+         <div className={classes.nameWrapper}>
+            <div className={classes.membership}>{props.membership}</div>
+            <div className={classes.name}>{props.name.split(' ')[0]}</div>
+            <div className={classes.status}>{props.status}</div>
+         </div>
+      </RoundButton>
+   );
 
    const oneLayer = (month, dateList) => {
       let total = 0;
@@ -35,10 +44,12 @@ const LinearCalendar = props => {
          if (attNum === 2) classStr.push(classes.two);
          if (attNum >= 3) classStr.push(classes.three);
          if (eachDay.test && eachDay.needDataFetch) classStr.push(classes.test);
-         if (eachDay.start && eachDay.needDataFetch) classStr.push(classes.start);
-         if (eachDay.date === date && eachDay.needDataFetch) classStr.push(classes.today);
+         if (eachDay.start && eachDay.needDataFetch)
+            classStr.push(classes.start);
+         if (eachDay.date === date && eachDay.needDataFetch)
+            classStr.push(classes.today);
          if (eachDay.day === 'Sunday') classStr.push(classes.sunday);
-         
+
          return (
             <div key={eachDay.id} className={classStr.join(' ')}>
                <div className={classes.dayUp}>
@@ -54,7 +65,7 @@ const LinearCalendar = props => {
             <div className={classes.board}>{board}</div>
             <div className={classes.spar}>{spar}</div>
          </div>
-      )
+      );
 
       return (
          <div className={classes.lineCalendar}>

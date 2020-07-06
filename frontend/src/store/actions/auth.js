@@ -37,20 +37,10 @@ export const memAuthSuccess = memAuthData => {
    };
 };
 
-export const gglIdFetchSuccess = (
-   ggleID,
-   statsGglID,
-   location,
-   locationID,
-   lastYearGglID
-) => {
+export const gglIdFetchSuccess = fetchSuccess => {
    return {
       type: actionTypes.GGL_ID_FETCH_SUCCESS,
-      ggleID,
-      statsGglID,
-      location,
-      locationID,
-      lastYearGglID,
+      ...fetchSuccess,
    };
 };
 
@@ -87,15 +77,7 @@ export const auth = (email, password) => {
       } else {
          const { authSuccess, fetchSuccess } = response.data;
 
-         dispatch(
-            gglIdFetchSuccess(
-               fetchSuccess.ggleID,
-               fetchSuccess.statsGglID,
-               fetchSuccess.location,
-               fetchSuccess.locationID,
-               fetchSuccess.lastYearGglID
-            )
-         );
+         dispatch(gglIdFetchSuccess(fetchSuccess));
 
          dispatch(
             authenSuccess(

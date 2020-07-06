@@ -33,3 +33,13 @@
    box-shadow: 0 10px #666;
    transform: translateY(6px);
 }
+
+.red {
+   background-color: rgb(218, 134, 134);
+}
+.green {
+   background-color: rgb(121, 190, 121);
+}
+.blue {
+   background-color: rgb(150, 154, 201);
+}

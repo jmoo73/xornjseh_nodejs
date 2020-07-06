@@ -56,6 +56,7 @@ const addNewMemberToList = (state, action) => {
    member.Beltcolor = action.member.Beltcolor;
    member.Membership = action.member.Membership;
    member.StartedOn = action.member.StartedOn;
+   member.Status = action.member.Status;
 
    nameList.push(member);
    return updateObject(state, { newMembersList: nameList });

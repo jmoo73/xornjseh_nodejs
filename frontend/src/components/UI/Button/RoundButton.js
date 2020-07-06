@@ -54,6 +54,12 @@ function RoundButton(props) {
             classes.BtnPressed,
          ];
          break;
+      case 'statName':
+         classPile = [
+            classes.statName,
+            classes[props.beltColor],
+         ];
+         break;
       default:
          break;
    }

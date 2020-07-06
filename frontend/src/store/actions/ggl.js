@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { days } from '../../shared/refData';
+import { days, colors, memberships } from '../../shared/refData';
 import axInstance from '../../shared/axios-orders';
 import { updateObject } from '../../shared/utility';
 
@@ -159,40 +159,45 @@ export const fetchPersonalAttendance = (
          { ggleID, lastYearGglID, fullNameList }
       );
       const personalAttendance = response.data.personalAttendance;
-      // Scaffold is made by makeMonthlyDataList() in refData from backend.
-      // personalAttendance = [ [ 'Apr', dateList], [ 'May', ... ], [ 'Jun', ... ] ]
-      // dateList =
-      // {
-      //    id,
-      //    date: makeDateStringNoDay(now),
-      //    day: days[now.getDay()],
-      //    attendance: [],
-      //    needDataFetch: true,
-      //    test: false,
-      //    start: false,
-      // }
+      // eqv. to [ fullName, allList ]
+      // allListList.push([fullName, allList, belt, startedOn, testedOn]);
+      // Sorting on Belt color
+
+      let sortedPersonalAttendance = [];
+      for (let i of colors) {
+         for (let el of personalAttendance) {
+            if (el[2] === i) {
+               sortedPersonalAttendance.push(el);
+            }
+         }
+      }
+
       dispatch(
          gglLoadSuccess({
-            personalAttendance,
+            personalAttendance: sortedPersonalAttendance,
          })
       );
       dispatch(gglLoadFinish);
    };
 };
 
-export const fetchGglDocs = ggleID => {
+export const fetchGglDocs = (ggleID, membershipGglID, locationID) => {
    return async dispatch => {
       dispatch(gglLoadStart());
 
       const responseTable = await axInstance.post('/classTable', { ggleID });
 
       const { classTable, classNameTable } = responseTable.data;
-      const classToday = classTable[today];
+      let classToday = [];
+      if (today !== 'Sunday') classToday = classTable[today];
       // Build persons.
       const responsePersons = await axInstance.post(
          '/gglThisYear/init-persons',
          {
             ggleID,
+            membershipGglID,
+            memberships,
+            locationID,
             classToday,
          }
       );
@@ -209,5 +214,16 @@ export const fetchGglDocs = ggleID => {
       );
 
       dispatch(gglLoadFinish());
+   };
+};
+
+export const updateMembership = (ggleID, memberList) => {
+   return async dispatch => {
+      dispatch(gglSaveStart());
+      await axInstance.post('/gglThisYear/update-membership', {
+         ggleID,
+         memberList,
+      });
+      dispatch(gglSaveFinish());
    };
 };

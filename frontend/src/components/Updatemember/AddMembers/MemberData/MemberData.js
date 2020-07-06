@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './MemberData.module.css';
-import { colors, memberships } from '../../../../shared/refData';
+import { colors, memberships, membershipsTitle } from '../../../../shared/refData';
 // import { checkValidity } from '../../../../shared/utility';
 
 class MemberData extends Component {
@@ -52,9 +52,9 @@ class MemberData extends Component {
             value={this.props.member.Membership}
          >
             <option>Membership</option>
-            {memberships.map(mem => (
+            {memberships.map((mem, index) => (
                <option key={mem} value={mem}>
-                  {mem}
+                  {membershipsTitle[index]}
                </option>
             ))}
          </select>

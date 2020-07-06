@@ -14,6 +14,7 @@ export {
   resetCurrClass,
   saveTestee,
   fetchPersonalAttendance,
+  updateMembership,
 } from './ggl'
 
 export {
