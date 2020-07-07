@@ -14,7 +14,6 @@ export {
   resetCurrClass,
   saveTestee,
   fetchPersonalAttendance,
-  updateMembership,
 } from './ggl'
 
 export {
@@ -33,4 +32,8 @@ export {
   addToList,
   removeFromList,
   saveAndClearList,
+  updateMembership,
+  addToUpdatesList,
+  removeFromUpdatesList,
+  emptyUpdatesList
 } from './mem'

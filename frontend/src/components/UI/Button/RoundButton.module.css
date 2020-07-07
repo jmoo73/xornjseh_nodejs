@@ -24,10 +24,23 @@
    border-radius: 25px;
 }
 
+.statName {
+   display: flex;
+   justify-content: center;
+   width: 100px;
+   height: 66px;
+   align-items: center;
+   margin: 0 10px 0 0;
+   border: none;
+   border-radius: 10px;
+   font-size: 14px;
+}
+
 .BeltButton:focus,
 .BeltButtonBig:focus,
 .nameButtonBig:focus,
-.NameButton:focus {
+.NameButton:focus,
+.statName:focus {
    outline: none;
 }
 
@@ -52,18 +65,6 @@
    height: 35px;
    border-radius: 20px;
    font-size: 10px;
-}
-
-.statName {
-   display: flex;
-   justify-content: center;
-   width: 100px;
-   height: 66px;
-   align-items: center;
-   margin: 0 10px 0 0;
-   border: none;
-   border-radius: 10px;
-   font-size: 14px;
 }
 
 .White {

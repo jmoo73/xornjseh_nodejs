@@ -160,14 +160,16 @@ export const fetchPersonalAttendance = (
       );
       const personalAttendance = response.data.personalAttendance;
       // eqv. to [ fullName, allList ]
-      // allListList.push([fullName, allList, belt, startedOn, testedOn]);
+      // allListList.push([fullName, allList, belt, startedOn, testedOn, status, membership]);
       // Sorting on Belt color
 
       let sortedPersonalAttendance = [];
       for (let i of colors) {
-         for (let el of personalAttendance) {
-            if (el[2] === i) {
-               sortedPersonalAttendance.push(el);
+         for (let j of memberships) {
+            for (let el of personalAttendance) {
+               if (el[2] === i && el[6] === j) {
+                  sortedPersonalAttendance.push(el);
+               }
             }
          }
       }
@@ -217,13 +219,3 @@ export const fetchGglDocs = (ggleID, membershipGglID, locationID) => {
    };
 };
 
-export const updateMembership = (ggleID, memberList) => {
-   return async dispatch => {
-      dispatch(gglSaveStart());
-      await axInstance.post('/gglThisYear/update-membership', {
-         ggleID,
-         memberList,
-      });
-      dispatch(gglSaveFinish());
-   };
-};

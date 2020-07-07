@@ -98,6 +98,8 @@ class Stats extends Component {
                   classStr.push(classes.chosen);
                if (ms === 'BBP') classStr.push(classes.BB);
                if (ms === 'MP') classStr.push(classes.MP);
+               if (ms === '1MO') classStr.push(classes.oneMO);
+               if (ms === '1YR') classStr.push(classes.oneYR);
                return (
                   <button
                      key={ms}

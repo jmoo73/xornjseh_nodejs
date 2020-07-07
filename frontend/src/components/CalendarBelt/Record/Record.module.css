@@ -7,9 +7,52 @@
    display: flex;
 }
 
+.nameWrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
 .membership {
    font-size: 10px;
+   background-color: white;
+   color: black;
+   border: 0.5px solid black;
+   width: 30px;
 }
+
+.BBP {
+   background-color: black;
+   font-weight: bold;
+   color: white;
+   border: 0.5px solid white;
+   width: 30px;
+}
+
+.MP {
+   background-color: red;
+   font-weight: bold;
+   color: white;
+   border: 0.5px solid white;
+   width: 30px;
+}
+
+.oneMO {
+   background-color: cyan;
+   font-weight: bold;
+   color: black;
+   border: 0.5px solid white;
+   width: 30px;
+}
+
+.oneYR {
+   background-color: goldenrod;
+   font-weight: bold;
+   color: white;
+   border: 0.5px solid white;
+   width: 30px;
+}
+
 .name {
    font-size: 20px;
    font-weight: bold;
@@ -23,9 +66,13 @@
    flex-direction: column;
    width: 22px;
    height: 22px;
-   background-color: rgb(230, 230, 230);
+   background-color: rgb(216, 216, 216);
    box-sizing: border-box;
    border: 1px solid white;
+}
+
+.edgeDays {
+   background-color: rgb(241, 241, 241);
 }
 
 .sunday {
@@ -41,7 +88,7 @@
    justify-content: flex-start;
    align-items: center;
    height: 40%;
-   color: rgb(172, 170, 170);
+   color: black;
    font-weight: bold;
    font-style: italic;
    font-size: 9px;

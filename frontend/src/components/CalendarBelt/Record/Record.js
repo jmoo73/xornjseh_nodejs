@@ -9,7 +9,15 @@ const LinearCalendar = props => {
    let name = (
       <RoundButton type="statName" beltColor={props.belt}>
          <div className={classes.nameWrapper}>
-            <div className={classes.membership}>{props.membership}</div>
+            <div
+               className={`${classes.membership} ${
+                  props.membership === 'BBP' && classes.BBP
+               } ${props.membership === 'MP' && classes.MP} ${
+                  props.membership === '1MO' && classes.oneMO
+               } ${props.membership === '1YR' && classes.oneYR}`}
+            >
+               {props.membership}
+            </div>
             <div className={classes.name}>{props.name.split(' ')[0]}</div>
             <div className={classes.status}>{props.status}</div>
          </div>
@@ -49,6 +57,7 @@ const LinearCalendar = props => {
          if (eachDay.date === date && eachDay.needDataFetch)
             classStr.push(classes.today);
          if (eachDay.day === 'Sunday') classStr.push(classes.sunday);
+         if (!eachDay.needDataFetch) classStr.push(classes.edgeDays)
 
          return (
             <div key={eachDay.id} className={classStr.join(' ')}>

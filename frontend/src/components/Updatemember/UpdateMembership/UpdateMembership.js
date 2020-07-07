@@ -16,26 +16,18 @@ class UpdateMembership extends Component {
       },
       touched: false,
       saving: false,
-      memberList: [],
-   };
-
-   removeFromList = index => {
-      let memberList = [...this.state.memberList];
-      memberList.splice(index, 1);
-      this.setState({ memberList });
    };
 
    addToList = () => {
-      // Remove any member with same id who was added to the List.
-      let memberList = [...this.state.memberList];
+      let memberList = [...this.props.updatesList];
       for (let index = 0; index < memberList.length; index++) {
          if (memberList[index].id === this.state.member.id) {
             memberList.splice(index, 1);
             break;
          }
       }
+      this.props.addToUpdatesList(this.state.member);
       this.setState({
-         memberList: [...memberList, { ...this.state.member }],
          touched: false,
          member: {
             ...this.state.member,
@@ -49,17 +41,15 @@ class UpdateMembership extends Component {
 
    saveChanges = async () => {
       this.setState({ saving: true });
-      // Writing to sheets.
       await this.props.updateMembership(
          this.props.ggleID,
-         this.state.memberList
+         this.props.updatesList
       );
       await this.props.onGgl(this.props.ggleID);
-
+      this.props.emptyUpdatesList();
       this.setState({
          touched: false,
          saving: false,
-         memberList: [],
          member: {
             ...this.state.member,
             id: '',
@@ -108,13 +98,13 @@ class UpdateMembership extends Component {
             Update membership and status here...
          </div>
       );
-      if (this.state.memberList.length !== 0) {
-         memberList = this.state.memberList.map((member, index) => {
+      if (this.props.updatesList.length !== 0) {
+         memberList = this.props.updatesList.map((member, index) => {
             return (
                <div key={member.Name + index} className={classes.lineWrapper}>
                   <div
                      className={classes.checkBox}
-                     onClick={() => this.removeFromList(index)}
+                     onClick={() => this.props.removeFromUpdatesList(index)}
                   >
                      remove
                   </div>
@@ -128,7 +118,7 @@ class UpdateMembership extends Component {
       }
 
       let registerBtn = null;
-      if (this.state.memberList.length !== 0) {
+      if (this.props.updatesList.length !== 0) {
          registerBtn = (
             <div className={classes.submitBtnWrapper}>
                <button className={classes.submitBtn} onClick={this.saveChanges}>
@@ -183,6 +173,7 @@ const mapStateToProps = state => {
    return {
       ggleID: state.auth.ggleID,
       persons: state.ggl.persons,
+      updatesList: state.mem.updatesList
    };
 };
 
@@ -191,6 +182,9 @@ const mapDispatchToProps = dispatch => {
       onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
       updateMembership: (ggleID, memberList) =>
          dispatch(actions.updateMembership(ggleID, memberList)),
+      addToUpdatesList: member => dispatch(actions.addToUpdatesList(member)),
+      removeFromUpdatesList: index => dispatch(actions.removeFromUpdatesList(index)),
+      emptyUpdatesList: () => dispatch(actions.emptyUpdatesList()),
    };
 };
 

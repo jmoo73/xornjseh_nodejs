@@ -34,7 +34,7 @@
   height: 50px;
   color: black;
   background-color: white;
-  border: 1px solid grey;
+  border: none;
 }
 
 .membershipBtn:focus {
@@ -51,6 +51,16 @@
   background-color: red;
   color: white;
   border: none;
+}
+
+.oneMO {
+  background-color: cyan;
+  color: black;
+}
+
+.oneYR {
+  background-color: goldenrod;
+  color: white;
 }
 
 .msTitle {

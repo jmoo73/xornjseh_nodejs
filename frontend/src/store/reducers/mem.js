@@ -13,6 +13,7 @@ const initialState = {
    saving: false,
    // [ { Name: 'Jeongmoo Park', Beltcolor: 'Bodon', Membership: 'MP', StartedOn: date }, ... ]
    newMembersList: [],
+   updatesList: [],
 };
 
 const loadStart = (state, action) => {
@@ -74,6 +75,22 @@ const clearList = (state, action) => {
    return updateObject(state, { newMembersList: [] });
 };
 
+const addToUpdatesList = (state, action) => {
+   let lst = [...state.updatesList];
+   lst.push(action.member);
+   return updateObject(state, { updatesList: lst });
+};
+
+const removeFromUpdatesList = (state, action) => {
+   let updatesList = [...state.updatesList];
+   updatesList.splice(action.index, 1);
+   return updateObject(state, { updatesList });
+};
+
+const emptyUpdatesList = (state, action) => {
+   return updateObject(state, { updatesList: [] });
+};
+
 const reducer = (state = initialState, action) => {
    switch (action.type) {
       case actionTypes.MEM_LOAD_START:
@@ -96,6 +113,12 @@ const reducer = (state = initialState, action) => {
          return removeMemberFromList(state, action);
       case actionTypes.CLEAR_LIST:
          return clearList(state, action);
+      case actionTypes.ADD_TO_UPDATES_LIST:
+         return addToUpdatesList(state, action);
+      case actionTypes.REMOVE_FROM_UPDATES_LIST:
+         return removeFromUpdatesList(state, action);
+      case actionTypes.EMPTY_UPDATES_LIST:
+         return emptyUpdatesList(state, action);
       default:
          return state;
    }

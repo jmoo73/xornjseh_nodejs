@@ -81,6 +81,10 @@ export const fetchAttData = (fullName, ggleID, lastYearGglID) => {
    };
 };
 
+//=============================
+//  Updating memberships
+//============================= 
+
 export const addToList = member => {
    return { type: actionTypes.ADD_TO_LIST, member };
 };
@@ -100,3 +104,30 @@ export const saveAndClearList = (ggleID, newMembersList) => {
       dispatch(saveFinish());
    };
 };
+
+export const updateMembership = (ggleID, memberList) => {
+   return async dispatch => {
+      dispatch(saveStart());
+      await axInstance.post('/gglThisYear/update-membership', {
+         ggleID,
+         memberList,
+      });
+      dispatch(saveFinish());
+   };
+};
+
+export const addToUpdatesList = member => {
+   return { type: actionTypes.ADD_TO_UPDATES_LIST, member };
+};
+
+
+export const removeFromUpdatesList = index => {
+   return { type: actionTypes.REMOVE_FROM_UPDATES_LIST, index}
+};
+
+export const emptyUpdatesList = () => {
+   return { type: actionTypes.EMPTY_UPDATES_LIST }
+}
+
+
+
