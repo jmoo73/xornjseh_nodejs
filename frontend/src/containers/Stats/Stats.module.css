@@ -41,7 +41,7 @@
   outline: none;
 }
 
-.BB {
+.BBP {
   background-color: black;
   color: white;
   border: none;
@@ -58,9 +58,10 @@
   color: black;
 }
 
-.oneYR {
-  background-color: goldenrod;
-  color: white;
+.TRIAL {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 .msTitle {

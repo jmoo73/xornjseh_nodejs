@@ -45,11 +45,11 @@
    width: 30px;
 }
 
-.oneYR {
-   background-color: goldenrod;
+.TRIAL {
+   background-color: white;
    font-weight: bold;
-   color: white;
-   border: 0.5px solid white;
+   color: black;
+   border: 0.5px solid grey;
    width: 30px;
 }
 

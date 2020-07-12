@@ -9,8 +9,8 @@ function NavigationItems(props) {
       <NavigationItem link="/auth-home" exact>Home</NavigationItem>
       {day? <NavigationItem link="/dailylog" exact>Attendance</NavigationItem>: null}
       {day? <NavigationItem link="/weeklylog" exact>Week</NavigationItem>: null}
-      {day? <NavigationItem link="/stats" exact>Stat</NavigationItem>: null}
-      {day? <NavigationItem link="/updatemember" exact>Update</NavigationItem> : null}
+      <NavigationItem link="/stats" exact>Stat</NavigationItem>
+      <NavigationItem link="/updatemember" exact>Update</NavigationItem>
     </React.Fragment>
   )
   

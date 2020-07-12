@@ -61,6 +61,7 @@ export const auth = (email, password) => {
                _.capitalize(email.split('@')[0]) + ' ' + _.capitalize(password),
             location: email.split('@')[1].replace('.', '-'),
          };
+
          const memberAuthRes = await axInstance.post(
             '/member/auth',
             memberAuthData
@@ -72,6 +73,7 @@ export const auth = (email, password) => {
             //{ location, fullName, ggleID, lastYearGglID, statsGglID, locationID }
             dispatch(memAuthSuccess(memberAuthRes.data));
          }
+         
       } else if (response.data.message) {
          dispatch(authFail({ message: response.data.message }));
       } else {

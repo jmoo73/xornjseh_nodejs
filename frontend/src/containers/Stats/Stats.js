@@ -108,10 +108,10 @@ class Stats extends Component {
                let classStr = [classes.membershipBtn];
                if (this.state.currMembership === ms)
                   classStr.push(classes.chosen);
-               if (ms === 'BBP') classStr.push(classes.BB);
                if (ms === 'MP') classStr.push(classes.MP);
+               if (ms === 'BBP') classStr.push(classes.BBP);
+               if (ms === 'TRIAL') classStr.push(classes.TRIAL);
                if (ms === '1MO') classStr.push(classes.oneMO);
-               if (ms === '1YR') classStr.push(classes.oneYR);
                return (
                   <button
                      key={ms}

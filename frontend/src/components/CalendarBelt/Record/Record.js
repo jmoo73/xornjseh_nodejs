@@ -14,7 +14,7 @@ const LinearCalendar = props => {
                   props.membership === 'BBP' && classes.BBP
                } ${props.membership === 'MP' && classes.MP} ${
                   props.membership === '1MO' && classes.oneMO
-               } ${props.membership === '1YR' && classes.oneYR}`}
+               } ${props.membership === 'TRIAL' && classes.TRIAL}`}
             >
                {props.membership}
             </div>

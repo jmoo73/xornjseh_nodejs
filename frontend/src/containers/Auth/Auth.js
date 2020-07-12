@@ -107,8 +107,10 @@ class Auth extends Component {
          if (day !== 0) {
             authRedirect = <Redirect to={this.props.memberAuthRedirectPath} />;
          } else {
-            console.log('in auth')
-            authRedirect = <Redirect to={this.props.memberAuthRedirectPathSunday} />
+            console.log('in auth');
+            authRedirect = (
+               <Redirect to={this.props.memberAuthRedirectPathSunday} />
+            );
          }
       }
 
@@ -121,7 +123,12 @@ class Auth extends Component {
                {errorMessage}
                {form}
                <form onSubmit={this.submitHandler}>
-                  <Button btnType="Success">SUBMIT</Button>
+                  {this.state.controls.email.valid &&
+                  this.state.controls.password.valid ? (
+                     <Button btnType="Success">SUBMIT</Button>
+                  ) : (
+                     <Button disabled>SUBMIT</Button>
+                  )}
                </form>
             </div>
          );

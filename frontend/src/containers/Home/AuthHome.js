@@ -17,7 +17,7 @@ class Home extends Component {
 
    async componentDidMount() {
       // dataLoaded is needed to avoid unnecessary loading after login-loading.
-      if (!this.props.dataLoaded && this.props.isAuthenticated && day) {
+      if (!this.props.dataLoaded && this.props.isAuthenticated) {
          await this.props.onStats(this.props.statsGglID, this.props.locationID);
          await this.props.onGgl(
             this.props.ggleID,

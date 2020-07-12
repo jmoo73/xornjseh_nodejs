@@ -49,10 +49,10 @@ const colors = [
    'Black',
 ];
 
-const memberships = ['1MO', '1YR', 'BBP', 'MP'];
+const memberships = ['1MO', 'TRIAL', 'BBP', 'MP'];
 const membershipsTitle = [
    '1-month trial',
-   '1-year program',
+   'Trial program',
    'Black belt program',
    'Master Program',
 ];

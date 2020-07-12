@@ -41,8 +41,10 @@ const initPersons = async (req, res, next) => {
          }
       }
 
-      for (let j of person.attClass) {
-         classAttender[j].push([row.Beltcolor, index]);
+      if (classToday.length !== 0) {
+         for (let j of person.attClass) {
+            classAttender[j].push([row.Beltcolor, index]);
+         }
       }
       return person;
    });
