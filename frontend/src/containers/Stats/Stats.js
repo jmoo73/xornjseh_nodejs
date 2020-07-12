@@ -20,7 +20,12 @@ class Stats extends Component {
       if (belt !== this.state.currBelt) {
          this.setState({ currBelt: belt, loading: true, loaded: false });
          let names = this.props.persons
-            .filter(person => person.belt === belt)
+            .filter(
+               person =>
+                  person.belt === belt &&
+                  person.status !== 'DROPOUT' &&
+                  person.status !== 'SUSPEND'
+            )
             .map(person => person.name);
 
          await this.props.fetchPersonalAttendance(
@@ -42,7 +47,12 @@ class Stats extends Component {
             loaded: false,
          });
          let names = this.props.persons
-            .filter(person => person.membership === membership)
+            .filter(
+               person =>
+                  person.membership === membership &&
+                  person.status !== 'DROPOUT' &&
+                  person.status !== 'SUSPEND'
+            )
             .map(person => person.name);
 
          await this.props.fetchPersonalAttendance(
@@ -61,7 +71,8 @@ class Stats extends Component {
          beltTotal.push(0);
       }
       this.props.persons.forEach(person => {
-         beltTotal[colors.indexOf(person.belt)]++;
+         if (person.status !== 'DROPOUT' && person.status !== 'SUSPEND')
+            beltTotal[colors.indexOf(person.belt)]++;
       });
 
       let membershipTotal = [];
@@ -69,7 +80,8 @@ class Stats extends Component {
          membershipTotal.push(0);
       }
       this.props.persons.forEach(person => {
-         membershipTotal[memberships.indexOf(person.membership)]++;
+         if (person.status !== 'DROPOUT' && person.status !== 'SUSPEND')
+            membershipTotal[memberships.indexOf(person.membership)]++;
       });
 
       let beltList = (
@@ -106,8 +118,12 @@ class Stats extends Component {
                      className={classStr.join(' ')}
                      onClick={() => this.membershipClicked(ms)}
                   >
-                     <div className={classes.msTitle}>{membershipsTitle[index]}</div>
-                     <div className={classes.msNumber}>{membershipTotal[index]}</div>
+                     <div className={classes.msTitle}>
+                        {membershipsTitle[index]}
+                     </div>
+                     <div className={classes.msNumber}>
+                        {membershipTotal[index]}
+                     </div>
                   </button>
                );
             })}
