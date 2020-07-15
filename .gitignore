@@ -4,6 +4,6 @@
 /frontend/.env
 /frontend/.env.production
 /backend/nodemon.json
-/backend/utils/client_secret.json
+/backend/utils/client_secret0.json
 /frontend/build
 /frontend/ggID_collection.txt
