@@ -22,7 +22,7 @@ class MemberHome extends Component {
          this.props.isMemberAuthenticated &&
          day !== 0
       ) {
-         await this.props.initMember(this.props.ggleID, this.props.fullName);
+         await this.props.initMember(this.props.ggleID, this.props.fullName, this.props.locationID);
       }
    }
 
@@ -135,8 +135,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
    return {
-      initMember: (ggleID, fullName) =>
-         dispatch(actions.initMember(ggleID, fullName)),
+      initMember: (ggleID, fullName, locationID) =>
+         dispatch(actions.initMember(ggleID, fullName, locationID)),
       checkIn: (
          fullName,
          ggleID,

@@ -18,7 +18,8 @@ class MemberAtt extends Component {
       await this.props.fetchAttData(
          this.props.fullName,
          this.props.ggleID,
-         this.props.lastYearGglID
+         this.props.lastYearGglID,
+         this.props.locationID
       );
    }
 
@@ -77,13 +78,14 @@ const mapStateToProps = state => {
       ggleID: state.auth.ggleID,
       lastYearGglID: state.auth.lastYearGglID,
       memberAttendance: state.mem.memberAttendance,
+      locationID: state.auth.locationID,
    };
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      fetchAttData: (fullName, ggleID, lastYearGglID) =>
-         dispatch(actions.fetchAttData(fullName, ggleID, lastYearGglID)),
+      fetchAttData: (fullName, ggleID, lastYearGglID, locationID) =>
+         dispatch(actions.fetchAttData(fullName, ggleID, lastYearGglID, locationID)),
    };
 };
 
