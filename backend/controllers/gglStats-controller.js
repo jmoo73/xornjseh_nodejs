@@ -6,7 +6,7 @@ const date = now.getMonth() + 1 + '/' + now.getDate() + '/' + now.getFullYear();
 
 const init = async (req, res, next) => {
    const { statsGglID, locationID } = req.body;
-   const gglStats = await gglIO.readSheet(statsGglID, locationID);
+   const gglStats = await gglIO.readSheet(statsGglID, 0, locationID);
 
    let dailyStat = {};
    let keyList = [];
@@ -32,7 +32,7 @@ const init = async (req, res, next) => {
 
 const submit = async (req, res, next) => {
    const { statsGglID, locationID, name, number } = req.body;
-   const gglStats = await gglIO.readSheet(statsGglID, locationID);
+   const gglStats = await gglIO.readSheet(statsGglID, 0, locationID);
 
    gglStats.forEach(async (row) => {
       if (row.Date === date) {
@@ -47,7 +47,7 @@ const submit = async (req, res, next) => {
 const weeklyTable = async (req, res, next) => {
    const { statsGglID, locationID, keyList } = req.body;
 
-   const gglStats = await gglIO.readSheet(statsGglID, locationID);
+   const gglStats = await gglIO.readSheet(statsGglID, 0, locationID);
 
    const now = new Date();
    let dayList = [];

@@ -21,7 +21,8 @@ const auth = async (req, res, next) => {
    try {
       exist = await gglIO.doesMemberExist(
          fullName,
-         response.data[location].thisYear.ggleSheetID
+         response.data[location].thisYear.ggleSheetID,
+         response.data[location].locationID
       );
    } catch (err) {
       res.json({
@@ -47,11 +48,11 @@ const auth = async (req, res, next) => {
 };
 
 const initMember = async (req, res, next) => {
-   const { ggleID, fullName } = req.body; // location = 'chapelhill-nc'
+   const { ggleID, fullName, locationID } = req.body; // location = 'chapelhill-nc'
 
    let classData = null;
    try {
-      classData = await gglIO.initMem(ggleID, fullName);
+      classData = await gglIO.initMem(ggleID, fullName, locationID);
    } catch (err) {}
 
    res.json({
@@ -60,13 +61,13 @@ const initMember = async (req, res, next) => {
 };
 
 const fetchAttData = async (req, res, next) => {
-   const { fullName, ggleID, lastYearGglID } = req.body;
+   const { fullName, ggleID, lastYearGglID, locationID } = req.body;
    
    let memberAttendance;
    try {
       memberAttendance = await gglIO.fetchAttendance(ggleID, lastYearGglID, [
          fullName,
-      ]);
+      ], locationID);
    } catch (err) {
       res.json({
          message: 'Something went wrong while looking up data (Try later!).',
@@ -87,8 +88,8 @@ const checkIn = async (req, res, next) => {
       locationID,
    } = req.body;
 
-   const gglThisYear = await gglIO.readSheet(ggleID, 0);
-   const stats = await gglIO.readSheet(statsGglID, +locationID);
+   const gglThisYear = await gglIO.readSheet(ggleID, 0, locationID);
+   const stats = await gglIO.readSheet(statsGglID, 0, locationID);
 
    let attStr = null;
    if (currClass.includes('Spar')) attStr = '$' + currClass;

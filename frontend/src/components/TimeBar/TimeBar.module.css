@@ -1,0 +1,8 @@
+.clock {
+   color: blue;
+   font-size: 1.5em;
+   background-color: rgb(231, 229, 229);
+   padding: 0 1em;
+   font-weight: bold;
+   border-radius: 0.2em;
+}

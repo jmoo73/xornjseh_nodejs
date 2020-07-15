@@ -23,6 +23,7 @@ class ClassBar extends Component {
                   <span className={classes.spanInButton}>
                      <strong>{this.props.classAttender[cls].length}</strong>
                   </span>
+                  <div className={classes.time}>{cl[2]}</div>
                </button>
             );
          } else {
@@ -55,7 +56,7 @@ class ClassBar extends Component {
          return (
             <React.Fragment>
                <div className={classes.classBarWrapper}>
-                  <DayBar fontSize='twenty' />
+                  <DayBar fontSize="twenty" />
                   <div className={classes.classBars}>
                      {classList}
                      {activityList}

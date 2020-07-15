@@ -29,13 +29,14 @@ export const memLogout = () => {
    return { type: actionTypes.MEM_LOGOUT };
 };
 
-export const initMember = (ggleID, fullName) => {
+export const initMember = (ggleID, fullName, locationID) => {
    return async dispatch => {
       dispatch(loadStart());
 
       const response = await axInstance.post('/member/init-member', {
          fullName,
          ggleID,
+         locationID,
       });
 
       dispatch(loadSuccess({ ...response.data }));
@@ -66,7 +67,7 @@ export const checkIn = (
    };
 };
 
-export const fetchAttData = (fullName, ggleID, lastYearGglID) => {
+export const fetchAttData = (fullName, ggleID, lastYearGglID, locationID) => {
    return async dispatch => {
       dispatch(loadStart());
 
@@ -74,6 +75,7 @@ export const fetchAttData = (fullName, ggleID, lastYearGglID) => {
          fullName,
          ggleID,
          lastYearGglID,
+         locationID,
       });
 
       dispatch(loadSuccess(memAttData.data));
@@ -93,24 +95,26 @@ export const removeFromList = index => {
    return { type: actionTypes.REMOVE_FROM_LIST, index };
 };
 
-export const saveAndClearList = (ggleID, newMembersList) => {
+export const saveAndClearList = (ggleID, newMembersList, locationID) => {
    return async dispatch => {
       dispatch(saveStart());
       await axInstance.post('/gglThisYear/add-new-member', {
          ggleID,
          newMembersList,
+         locationID,
       });
       dispatch({ type: actionTypes.CLEAR_LIST });
       dispatch(saveFinish());
    };
 };
 
-export const updateMembership = (ggleID, memberList) => {
+export const updateMembership = (ggleID, memberList, locationID) => {
    return async dispatch => {
       dispatch(saveStart());
       await axInstance.post('/gglThisYear/update-membership', {
          ggleID,
          memberList,
+         locationID,
       });
       dispatch(saveFinish());
    };

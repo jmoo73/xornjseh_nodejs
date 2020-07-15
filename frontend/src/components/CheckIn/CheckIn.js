@@ -75,7 +75,7 @@ class CheckIn extends Component {
                .
             </div>
             <div className={classes.dayBar}>
-               <DayBar fontSize="fifteen" />
+               <DayBar fontSize="fifteen" timebar />
             </div>
             <SmallClassButton
                whenClassClicked={this.classSelect}

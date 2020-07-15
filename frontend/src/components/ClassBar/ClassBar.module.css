@@ -12,6 +12,11 @@
    justify-content: flex-start;
 }
 
+.time {
+   font-size: 16px;
+   color: yellow;
+}
+
 @media (max-width: 399px) {
    .classBars {
       /* justify-items: center; */
@@ -30,7 +35,7 @@
    font-size: 13px;
    margin: 10px 2px;
    cursor: pointer;
-   border-radius: 25px;
+   border-radius: 10px;
    width: 100px;
    height: 50px;
 }
@@ -51,7 +56,7 @@
       margin: 10px 2px;
       width: 200px;
       height: 60px;
-      border-radius: 30px;
+      border-radius: 10px;
    }
    .spanInButton {
     font-size: 20px;

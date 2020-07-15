@@ -96,6 +96,7 @@ export const whenAttenderSubmitClicked = (
       await axInstance.post('/gglThisYear/update-persons', {
          ggleID,
          members,
+         locationID,
       });
 
       // ==================================================
@@ -106,6 +107,7 @@ export const whenAttenderSubmitClicked = (
          {
             ggleID,
             classToday,
+            locationID,
          }
       );
 
@@ -127,10 +129,10 @@ export const whenAttenderSubmitClicked = (
    };
 };
 
-export const saveTestee = (ggleID, testees) => {
+export const saveTestee = (ggleID, testees, locationID) => {
    return async dispatch => {
       dispatch(gglSaveStart());
-      axInstance.post('/gglThisYear/save-testees', { ggleID, testees });
+      await axInstance.post('/gglThisYear/save-testees', { ggleID, testees, locationID });
       dispatch(gglSaveFinish());
    };
 };
@@ -150,13 +152,14 @@ export const resetCurrClass = () => {
 export const fetchPersonalAttendance = (
    ggleID,
    lastYearGglID,
-   fullNameList
+   fullNameList,
+   locationID
 ) => {
    return async dispatch => {
       dispatch(gglLoadStart);
       const response = await axInstance.post(
          '/gglThisYear/personal-attendance',
-         { ggleID, lastYearGglID, fullNameList }
+         { ggleID, lastYearGglID, fullNameList, locationID }
       );
       const personalAttendance = response.data.personalAttendance;
       // eqv. to [ fullName, allList ]
@@ -187,7 +190,7 @@ export const fetchGglDocs = (ggleID, membershipGglID, locationID) => {
    return async dispatch => {
       dispatch(gglLoadStart());
 
-      const responseTable = await axInstance.post('/classTable', { ggleID });
+      const responseTable = await axInstance.post('/classTable', { ggleID, locationID });
 
       const { classTable, classNameTable } = responseTable.data;
       let classToday = [];

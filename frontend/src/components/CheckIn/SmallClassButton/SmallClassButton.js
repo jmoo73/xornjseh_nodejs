@@ -14,7 +14,8 @@ function SmallClassButton(props) {
                   className={classStr.join(' ')}
                   onClick={() => props.whenClassClicked(cls[1])}
                >
-                  {cls[1]}
+                  <div className={classes.name}>{cls[1]}</div>
+                  <div className={classes.time}>{cls[2]}</div>
                </button>
             );
          })}

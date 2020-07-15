@@ -1,6 +1,7 @@
 import React from 'react';
 import { days } from '../../shared/refData';
 import classes from './DayBar.module.css';
+import TimeBar from '../TimeBar/TimeBar';
 
 const now = new Date();
 const day = now.getDay(); // day=0 on Sunday.
@@ -14,7 +15,7 @@ const DayBar = props => {
 
    return (
       <div className={classStr.join(' ')}>
-         {date} {today}
+         {date} {today} {props.timebar && <TimeBar />}
       </div>
    );
 };

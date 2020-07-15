@@ -19,7 +19,11 @@ class AddMembers extends Component {
    };
 
    addToList = () => {
-      this.props.addToList({ ...this.state.member, StartedOn: date, Status: 'ACTIVE' });
+      this.props.addToList({
+         ...this.state.member,
+         StartedOn: date,
+         Status: 'ACTIVE',
+      });
       this.setState({
          member: {
             ...this.state.member,
@@ -34,9 +38,14 @@ class AddMembers extends Component {
       this.setState({ saving: true });
       await this.props.saveAndClearList(
          this.props.ggleID,
-         this.props.newMembersList
+         this.props.newMembersList,
+         this.props.locationID
       );
-      await this.props.onGgl(this.props.ggleID);
+      await this.props.onGgl(
+         this.props.ggleID,
+         this.props.membershipGglID,
+         this.props.locationID
+      );
       this.setState({
          saving: false,
       });
@@ -96,7 +105,6 @@ class AddMembers extends Component {
          this.state.member.Beltcolor !== '' &&
          this.state.member.Membership !== ''
       ) {
-         
          addBtn = (
             <div className={classes.addBtnWrapper}>
                <button className={classes.addBtn} onClick={this.addToList}>
@@ -128,16 +136,19 @@ const mapStateToProps = state => {
    return {
       ggleID: state.auth.ggleID,
       newMembersList: state.mem.newMembersList,
+      membershipGglID: state.auth.membershipGglID,
+      locationID: state.auth.locationID,
    };
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
+      onGgl: (ggleID, membershipGglID, locationID) =>
+         dispatch(actions.fetchGglDocs(ggleID, membershipGglID, locationID)),
       addToList: member => dispatch(actions.addToList(member)),
       removeFromList: index => dispatch(actions.removeFromList(index)),
-      saveAndClearList: (id, lst) =>
-         dispatch(actions.saveAndClearList(id, lst)),
+      saveAndClearList: (ggleID, lst, locationID) =>
+         dispatch(actions.saveAndClearList(ggleID, lst, locationID)),
    };
 };
 

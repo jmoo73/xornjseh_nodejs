@@ -30,8 +30,16 @@ class UpdateBelts extends Component {
    };
 
    triggerSave = async () => {
-      await this.props.saveTestee(this.props.ggleID, this.state.testees);
-      await this.props.onGgl(this.props.ggleID);
+      await this.props.saveTestee(
+         this.props.ggleID,
+         this.state.testees,
+         this.props.locationID
+      );
+      await this.props.onGgl(
+         this.props.ggleID,
+         this.props.membershipGglID,
+         this.props.locationID
+      );
       this.props.resetBtn();
    };
 
@@ -80,14 +88,17 @@ const mapStateToProps = state => {
       saving: state.ggl.saving,
       loading: state.ggl.loading, // for refreshing entire data.
       ggleID: state.auth.ggleID,
+      membershipGglID: state.auth.membershipGglID,
+      locationID: state.auth.locationID,
    };
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      saveTestee: (ggleID, testees) =>
-         dispatch(actions.saveTestee(ggleID, testees)),
-      onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
+      saveTestee: (ggleID, testees, locationID) =>
+         dispatch(actions.saveTestee(ggleID, testees, locationID)),
+      onGgl: (ggleID, membershipGglID, locationID) =>
+         dispatch(actions.fetchGglDocs(ggleID, membershipGglID, locationID)),
    };
 };
 

@@ -12,7 +12,7 @@ const initPersons = async (req, res, next) => {
       locationID,
       classToday,
    } = req.body;
-   const gglThisYear = await gglIO.readSheet(ggleID, 0);
+   const gglThisYear = await gglIO.readSheet(ggleID, 0, locationID);
 
    let classAttender = {};
    if (classToday.length !== 0) {
@@ -60,8 +60,8 @@ const initPersons = async (req, res, next) => {
 };
 
 const updatePersons = async (req, res, next) => {
-   const { ggleID, members } = req.body;
-   const gglThisYear = await gglIO.readSheet(ggleID, 0);
+   const { ggleID, members, locationID } = req.body;
+   const gglThisYear = await gglIO.readSheet(ggleID, 0, locationID);
 
    const patt = /[/$#][^/$#!]*/g;
    members.forEach(async (member) => {
@@ -83,8 +83,8 @@ const updatePersons = async (req, res, next) => {
 };
 
 const saveTestees = async (req, res, next) => {
-   const { ggleID, testees } = req.body;
-   const gglThisYear = await gglIO.readSheet(ggleID, 0);
+   const { ggleID, testees, locationID } = req.body;
+   const gglThisYear = await gglIO.readSheet(ggleID, 0, locationID);
 
    testees.forEach(async (testee) => {
       let colorId = colors.indexOf(testee[0]);
@@ -101,8 +101,8 @@ const saveTestees = async (req, res, next) => {
 };
 
 const updateMembership = async (req, res, next) => {
-   const { ggleID, memberList } = req.body;
-   const gglThisYear = await gglIO.readSheet(ggleID, 0);
+   const { ggleID, memberList, locationID } = req.body;
+   const gglThisYear = await gglIO.readSheet(ggleID, 0, locationID);
 
    memberList.forEach(async (member) => {
       let row = gglThisYear[member.id];
@@ -116,20 +116,21 @@ const updateMembership = async (req, res, next) => {
 };
 
 const personalAttendance = async (req, res, next) => {
-   const { ggleID, lastYearGglID, fullNameList } = req.body;
+   const { ggleID, lastYearGglID, fullNameList, locationID } = req.body;
    const allListList = await gglIO.fetchAttendance(
       ggleID,
       lastYearGglID,
-      fullNameList
+      fullNameList,
+      locationID
    );
 
    res.json({ personalAttendance: allListList });
 };
 
 const addNewMember = async (req, res, next) => {
-   const { ggleID, newMembersList } = req.body;
+   const { ggleID, newMembersList, locationID } = req.body;
 
-   const sheet = await gglIO.getSheetObj(ggleID, 0);
+   const sheet = await gglIO.getSheetObj(ggleID, 0, locationID);
    for (let newMember of newMembersList) {
       await sheet.addRow(newMember);
    }

@@ -31,7 +31,8 @@ class Stats extends Component {
          await this.props.fetchPersonalAttendance(
             this.props.ggleID,
             this.props.lastYearGglID,
-            names
+            names,
+            this.props.locationID
          );
 
          this.setState({ loading: false, loaded: true });
@@ -58,7 +59,8 @@ class Stats extends Component {
          await this.props.fetchPersonalAttendance(
             this.props.ggleID,
             this.props.lastYearGglID,
-            names
+            names,
+            this.props.locationID
          );
 
          this.setState({ loading: false, loaded: true });
@@ -166,14 +168,15 @@ const mapStateToProps = state => {
       ggleID: state.auth.ggleID,
       lastYearGglID: state.auth.lastYearGglID,
       personalAttendance: state.ggl.personalAttendance,
+      locationID: state.auth.locationID,
    };
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      fetchPersonalAttendance: (ggleID, lastYearGglID, fullName) =>
+      fetchPersonalAttendance: (ggleID, lastYearGglID, fullName, locationID) =>
          dispatch(
-            actions.fetchPersonalAttendance(ggleID, lastYearGglID, fullName)
+            actions.fetchPersonalAttendance(ggleID, lastYearGglID, fullName, locationID)
          ),
    };
 };

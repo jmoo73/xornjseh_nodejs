@@ -43,9 +43,14 @@ class UpdateMembership extends Component {
       this.setState({ saving: true });
       await this.props.updateMembership(
          this.props.ggleID,
-         this.props.updatesList
+         this.props.updatesList,
+         this.props.locationID
       );
-      await this.props.onGgl(this.props.ggleID);
+      await this.props.onGgl(
+         this.props.ggleID,
+         this.props.membershipGglID,
+         this.props.locationID
+      );
       this.props.emptyUpdatesList();
       this.setState({
          touched: false,
@@ -173,15 +178,18 @@ const mapStateToProps = state => {
    return {
       ggleID: state.auth.ggleID,
       persons: state.ggl.persons,
-      updatesList: state.mem.updatesList
+      updatesList: state.mem.updatesList,
+      membershipGglID: state.auth.membershipGglID,
+      locationID: state.auth.locationID,
    };
 };
 
 const mapDispatchToProps = dispatch => {
    return {
-      onGgl: ggleID => dispatch(actions.fetchGglDocs(ggleID)),
-      updateMembership: (ggleID, memberList) =>
-         dispatch(actions.updateMembership(ggleID, memberList)),
+      onGgl: (ggleID, membershipGglID, locationID) =>
+         dispatch(actions.fetchGglDocs(ggleID, membershipGglID, locationID)),
+      updateMembership: (ggleID, memberList, locationID) =>
+         dispatch(actions.updateMembership(ggleID, memberList, locationID)),
       addToUpdatesList: member => dispatch(actions.addToUpdatesList(member)),
       removeFromUpdatesList: index => dispatch(actions.removeFromUpdatesList(index)),
       emptyUpdatesList: () => dispatch(actions.emptyUpdatesList()),
